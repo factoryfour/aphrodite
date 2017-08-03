@@ -1605,7 +1605,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        StyleSheetServer: StyleSheetServer,
 	        StyleSheetTestUtils: StyleSheetTestUtils,
-	
+	        reset: _inject.reset,
 	        css: function css() /* : MaybeSheetDefinition[] */{
 	            for (var _len = arguments.length, styleDefinitions = Array(_len), _key = 0; _key < _len; _key++) {
 	                styleDefinitions[_key] = arguments[_key];

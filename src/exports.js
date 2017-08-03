@@ -130,7 +130,7 @@ const makeExports = (
 
         StyleSheetServer,
         StyleSheetTestUtils,
-
+        reset,
         css(...styleDefinitions /* : MaybeSheetDefinition[] */) {
             return injectAndGetClassName(
                 useImportant, styleDefinitions, selectorHandlers);
