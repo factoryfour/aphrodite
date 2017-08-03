@@ -29,17 +29,22 @@ let styleTag = null;
 const injectStyleTag = (cssContents /* : string */) => {
     if (styleTag == null) {
         // Try to find a style tag with the `data-aphrodite` attribute first.
-        styleTag = document.querySelector("style[data-aphrodite]");
+        styleTag = document.querySelector("style[data-aphrodite-factoryfour]");
 
         // If that doesn't work, generate a new style tag.
         if (styleTag == null) {
             // Taken from
             // http://stackoverflow.com/questions/524696/how-to-create-a-style-tag-with-javascript
-            const head = document.head || document.getElementsByTagName('head')[0];
-            styleTag = document.createElement('style');
+            var docToUse = document;
+            if (document.getElementById('factory-four-primary-container') == null) {
+                docToUse = document.getElementById('factoryfour-primary-container').contentDocument;
+            } 
+
+            var head = docToUse.head || docToUse.getElementsByTagName('head')[0];
+            styleTag = docToUse.createElement('style');
 
             styleTag.type = 'text/css';
-            styleTag.setAttribute("data-aphrodite", "");
+            styleTag.setAttribute("data-aphrodite-factoryfour", "");
             head.appendChild(styleTag);
         }
     }
