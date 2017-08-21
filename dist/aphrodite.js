@@ -1855,7 +1855,7 @@ module.exports =
 	            // Taken from
 	            // http://stackoverflow.com/questions/524696/how-to-create-a-style-tag-with-javascript
 	            var docToUse = document;
-	            if (document.getElementById('factory-four-primary-container') == null) {
+	            if (document.getElementById('factoryfour-primary-container') != null) {
 	                docToUse = document.getElementById('factoryfour-primary-container').contentDocument;
 	            }
 
@@ -2073,7 +2073,7 @@ module.exports =
 	// We append this extra byte to the 32bit hash to decrease the chance of hash collisions.
 	var getStyleDefinitionsLengthHash = function getStyleDefinitionsLengthHash(styleDefinitions /* : any[] */) {
 	    return (/* : string */(styleDefinitions.reduce(function (length, styleDefinition) {
-	            return length + styleDefinition._len;
+	            return length + (styleDefinition ? styleDefinition._len : 0);
 	        }, 0) % 36).toString(36)
 	    );
 	};
