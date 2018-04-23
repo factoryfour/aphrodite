@@ -1,6 +1,6 @@
 {
   "name": "@factoryfour/aphrodite",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Inline styles in JS that just work (TM)",
   "keywords": [
     "css",
