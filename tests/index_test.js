@@ -113,9 +113,9 @@ describe('css', () => {
         });
     });
 
-    it('automatically uses a style tag with the data-aphrodite attribute', done => {
+    it('automatically uses a style tag with the data-aphrodite-factoryfour attribute', done => {
         const style = document.createElement("style");
-        style.setAttribute("data-aphrodite", "");
+        style.setAttribute("data-aphrodite-factoryfour", "");
         document.head.appendChild(style);
 
         const sheet = StyleSheet.create({

@@ -10,8 +10,7 @@
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint --fix --cache . && flow check",
-    "test": "npm run coverage",
-    "posttest": "npm run lint",
+    "test": "npm run tests",
     "coverage": "nyc --check-coverage --lines 100 --branches 100 npm run tests",
     "coveralls": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
     "pretest": "npm run build:prefixes",

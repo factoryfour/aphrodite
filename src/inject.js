@@ -35,12 +35,12 @@ const injectStyleTag = (cssContents /* : string */) => {
         if (styleTag == null) {
             // Taken from
             // http://stackoverflow.com/questions/524696/how-to-create-a-style-tag-with-javascript
-            var docToUse = document;
+            let docToUse = document;
             if (document.getElementById('factoryfour-primary-container') != null) {
                 docToUse = document.getElementById('factoryfour-primary-container').contentDocument;
             } 
 
-            var head = docToUse.head || docToUse.getElementsByTagName('head')[0];
+            const head = docToUse.head || docToUse.getElementsByTagName('head')[0];
             styleTag = docToUse.createElement('style');
 
             styleTag.type = 'text/css';

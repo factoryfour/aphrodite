@@ -169,7 +169,7 @@ describe('injection', () => {
         // browser-specific tests
         it('adds to the .styleSheet.cssText if available', done => {
             const styleTag = global.document.createElement("style");
-            styleTag.setAttribute("data-aphrodite", "");
+            styleTag.setAttribute("data-aphrodite-factoryfour", "");
             document.head.appendChild(styleTag);
             styleTag.styleSheet = { cssText: "" };
 
