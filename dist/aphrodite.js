@@ -2386,12 +2386,14 @@ var StyleSheet$1 = Aphrodite.StyleSheet,
     StyleSheetServer$1 = Aphrodite.StyleSheetServer,
     StyleSheetTestUtils$1 = Aphrodite.StyleSheetTestUtils,
     css = Aphrodite.css,
+    reset$1 = Aphrodite.reset,
     minify = Aphrodite.minify;
 
 exports.StyleSheet = StyleSheet$1;
 exports.StyleSheetServer = StyleSheetServer$1;
 exports.StyleSheetTestUtils = StyleSheetTestUtils$1;
 exports.css = css;
+exports.reset = reset$1;
 exports.minify = minify;
 exports.flushToStyleTag = flushToStyleTag;
 exports.injectAndGetClassName = injectAndGetClassName;

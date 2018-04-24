@@ -14,6 +14,7 @@ const {
     StyleSheetServer,
     StyleSheetTestUtils,
     css,
+    reset,
     minify,
 } = Aphrodite;
 
@@ -22,6 +23,7 @@ export {
     StyleSheetServer,
     StyleSheetTestUtils,
     css,
+    reset,
     minify,
     flushToStyleTag,
     injectAndGetClassName,
