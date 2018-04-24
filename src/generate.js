@@ -14,12 +14,12 @@ const prefixAll = createPrefixer(staticData);
 /* ::
 import type { SheetDefinition } from './index.js';
 type StringHandlers = { [id:string]: Function };
-type SelectorCallback = (selector: string) => any;
+type SelectorCallback = (selector: string) => string[];
 export type SelectorHandler = (
     selector: string,
     baseSelector: string,
     callback: SelectorCallback
-) => string | null;
+) => string[] | string | null;
 */
 
 /**
@@ -49,9 +49,10 @@ export type SelectorHandler = (
  *   callback('.foo:nth-child(2n):hover')
  *
  * to generate its subtree `{ color: 'red' }` styles with a
- * '.foo:nth-child(2n):hover' selector. The callback would return CSS like
+ * '.foo:nth-child(2n):hover' selector. The callback would return an array of CSS
+ * rules like
  *
- *   '.foo:nth-child(2n):hover{color:red !important;}'
+ *   ['.foo:nth-child(2n):hover{color:red !important;}']
  *
  * and the handler would then return that resulting CSS.
  *
@@ -67,16 +68,12 @@ export type SelectorHandler = (
  * @param {function} generateSubtreeStyles: A function which can be called to
  *     generate CSS for the subtree of styles corresponding to the selector.
  *     Accepts a new baseSelector to use for generating those styles.
- * @returns {?string} The generated CSS for this selector, or null if we don't
- *     handle this selector.
+ * @returns {string[] | string | null} The generated CSS for this selector, or
+ *     null if we don't handle this selector.
  */
-export const defaultSelectorHandlers = [
+export const defaultSelectorHandlers /* : SelectorHandler[] */ = [
     // Handle pseudo-selectors, like :hover and :nth-child(3n)
-    function pseudoSelectors(
-        selector /* : string */,
-        baseSelector /* : string */,
-        generateSubtreeStyles /* : Function */
-    ) /* */ {
+    function pseudoSelectors(selector, baseSelector, generateSubtreeStyles) {
         if (selector[0] !== ":") {
             return null;
         }
@@ -84,17 +81,13 @@ export const defaultSelectorHandlers = [
     },
 
     // Handle media queries (or font-faces)
-    function mediaQueries(
-        selector /* : string */,
-        baseSelector /* : string */,
-        generateSubtreeStyles /* : Function */
-    ) /* */ {
+    function mediaQueries(selector, baseSelector, generateSubtreeStyles) {
         if (selector[0] !== "@") {
             return null;
         }
         // Generate the styles normally, and then wrap them in the media query.
         const generated = generateSubtreeStyles(baseSelector);
-        return `${selector}{${generated}}`;
+        return [`${selector}{${generated.join('')}}`];
     },
 ];
 
@@ -147,7 +140,7 @@ export const generateCSS = (
     selectorHandlers /* : SelectorHandler[] */,
     stringHandlers /* : StringHandlers */,
     useImportant /* : boolean */
-) /* : string */ => {
+) /* : string[] */ => {
     const merged = new OrderedElements();
 
     for (let i = 0; i < styleTypes.length; i++) {
@@ -155,7 +148,7 @@ export const generateCSS = (
     }
 
     const plainDeclarations = new OrderedElements();
-    let generatedStyles = "";
+    const generatedStyles = [];
 
     // TODO(emily): benchmark this to see if a plain for loop would be faster.
     merged.forEach((val, key) => {
@@ -170,23 +163,40 @@ export const generateCSS = (
             if (result != null) {
                 // If the handler returned something, add it to the generated
                 // CSS and stop looking for another handler.
-                generatedStyles += result;
+                if (Array.isArray(result)) {
+                    generatedStyles.push(...result);
+                } else {
+                    // eslint-disable-next-line
+                    console.warn(
+                        'WARNING: Selector handlers should return an array of rules.' +
+                        'Returning a string containing multiple rules is deprecated.',
+                        handler,
+                    );
+                    generatedStyles.push(`@media all {${result}}`);
+                }
                 return true;
             }
         });
         // If none of the handlers handled it, add it to the list of plain
         // style declarations.
         if (!foundHandler) {
-            plainDeclarations.set(key, val);
+            plainDeclarations.set(key, val, true);
         }
     });
-
-    return (
-        generateCSSRuleset(
-            selector, plainDeclarations, stringHandlers, useImportant,
-            selectorHandlers) +
-        generatedStyles
+    const generatedRuleset = generateCSSRuleset(
+        selector,
+        plainDeclarations,
+        stringHandlers,
+        useImportant,
+        selectorHandlers,
     );
+
+
+    if (generatedRuleset) {
+        generatedStyles.unshift(generatedRuleset);
+    }
+
+    return generatedStyles;
 };
 
 /**
@@ -199,9 +209,9 @@ const runStringHandlers = (
     declarations /* : OrderedElements */,
     stringHandlers /* : StringHandlers */,
     selectorHandlers /* : SelectorHandler[] */
-) /* : OrderedElements */ => {
+) /* : void */ => {
     if (!stringHandlers) {
-        return declarations;
+        return;
     }
 
     const stringHandlerKeys = Object.keys(stringHandlers);
@@ -219,12 +229,15 @@ const runStringHandlers = (
             // handlers are very specialized and do complex things.
             declarations.set(
                 key,
-                stringHandlers[key](declarations.get(key), selectorHandlers)
+                stringHandlers[key](declarations.get(key), selectorHandlers),
+
+                // Preserve order here, since we are really replacing an
+                // unprocessed style with a processed style, not overriding an
+                // earlier style
+                false
             );
         }
     }
-
-    return declarations;
 };
 
 
@@ -236,6 +249,11 @@ const transformRule = (
     `${kebabifyStyleName(key)}:${transformValue(key, value)};`
 );
 
+
+const arrayToObjectKeysReducer = (acc, val) => {
+    acc[val] = true;
+    return acc;
+};
 
 /**
  * Generate a CSS ruleset with the selector and containing the declarations.
@@ -278,7 +296,8 @@ export const generateCSSRuleset = (
     // Mutates declarations
     runStringHandlers(declarations, stringHandlers, selectorHandlers);
 
-    const originalElements = {...declarations.elements};
+    const originalElements = Object.keys(declarations.elements)
+        .reduce(arrayToObjectKeysReducer, Object.create(null));
 
     // NOTE(emily): This mutates handledDeclarations.elements.
     const prefixedElements = prefixAll(declarations.elements);
@@ -292,7 +311,7 @@ export const generateCSSRuleset = (
         // sortOrder, which means it was added by prefixAll. This means that we
         // need to figure out where it should appear in the sortOrder.
         for (let i = 0; i < elementNames.length; i++) {
-            if (!originalElements.hasOwnProperty(elementNames[i])) {
+            if (!originalElements[elementNames[i]]) {
                 // This element is not in the sortOrder, which means it is a prefixed
                 // value that was added by prefixAll. Let's try to figure out where it
                 // goes.
@@ -311,7 +330,7 @@ export const generateCSSRuleset = (
                     originalStyle = elementNames[i][2].toLowerCase() + elementNames[i].slice(3);
                 }
 
-                if (originalStyle && originalElements.hasOwnProperty(originalStyle)) {
+                if (originalStyle && originalElements[originalStyle]) {
                     const originalIndex = declarations.keyOrder.indexOf(originalStyle);
                     declarations.keyOrder.splice(originalIndex, 0, elementNames[i]);
                 } else {

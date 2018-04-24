@@ -4,9 +4,30 @@
 // appended to them.
 import {defaultSelectorHandlers} from './generate';
 import makeExports from './exports';
+import {flushToStyleTag, injectAndGetClassName} from './inject';
 
 const useImportant = false; // Don't add !important to style definitions
-export default makeExports(
+
+const Aphrodite = makeExports(
     useImportant,
     defaultSelectorHandlers
 );
+
+const {
+    StyleSheet,
+    StyleSheetServer,
+    StyleSheetTestUtils,
+    css,
+    minify
+} = Aphrodite;
+
+export {
+    StyleSheet,
+    StyleSheetServer,
+    StyleSheetTestUtils,
+    css,
+    minify,
+    flushToStyleTag,
+    injectAndGetClassName,
+    defaultSelectorHandlers,
+};
