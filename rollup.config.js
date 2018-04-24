@@ -20,8 +20,6 @@ function distBuild(options) {
         plugins: [
             babel({
                 exclude: ['node_modules/**'],
-                plugins: ['external-helpers'],
-                externalHelpers: true
             }),
             replace({
                 'process.env.NODE_ENV': JSON.stringify('production'),
@@ -55,8 +53,6 @@ function standardBuilds(filename) {
         plugins: [
             babel({
                 exclude: ['node_modules/**'],
-                plugins: ['external-helpers'],
-                externalHelpers: true
             }),
             commonjs(), // so rollup can convert node modules to ESM if needed
         ]

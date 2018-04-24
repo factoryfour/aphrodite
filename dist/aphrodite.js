@@ -812,6 +812,12 @@ var staticPrefixData = {
   prefixMap: { "transform": wms, "transformOrigin": wms, "transformOriginX": wms, "transformOriginY": wms, "backfaceVisibility": w, "perspective": w, "perspectiveOrigin": w, "transformStyle": w, "transformOriginZ": w, "animation": w, "animationDelay": w, "animationDirection": w, "animationFillMode": w, "animationDuration": w, "animationIterationCount": w, "animationName": w, "animationPlayState": w, "animationTimingFunction": w, "appearance": wm, "userSelect": wmms, "fontKerning": w, "textEmphasisPosition": w, "textEmphasis": w, "textEmphasisStyle": w, "textEmphasisColor": w, "boxDecorationBreak": w, "clipPath": w, "maskImage": w, "maskMode": w, "maskRepeat": w, "maskPosition": w, "maskClip": w, "maskOrigin": w, "maskSize": w, "maskComposite": w, "mask": w, "maskBorderSource": w, "maskBorderMode": w, "maskBorderSlice": w, "maskBorderWidth": w, "maskBorderOutset": w, "maskBorderRepeat": w, "maskBorder": w, "maskType": w, "textDecorationStyle": wm, "textDecorationSkip": wm, "textDecorationLine": wm, "textDecorationColor": wm, "filter": w, "fontFeatureSettings": wm, "breakAfter": wmms, "breakBefore": wmms, "breakInside": wmms, "columnCount": wm, "columnFill": wm, "columnGap": wm, "columnRule": wm, "columnRuleColor": wm, "columnRuleStyle": wm, "columnRuleWidth": wm, "columns": wm, "columnSpan": wm, "columnWidth": wm, "writingMode": wms, "flex": wms, "flexBasis": w, "flexDirection": wms, "flexGrow": w, "flexFlow": wms, "flexShrink": w, "flexWrap": wms, "alignContent": w, "alignItems": w, "alignSelf": w, "justifyContent": w, "order": w, "transitionDelay": w, "transitionDuration": w, "transitionProperty": w, "transitionTimingFunction": w, "backdropFilter": w, "scrollSnapType": wms, "scrollSnapPointsX": wms, "scrollSnapPointsY": wms, "scrollSnapDestination": wms, "scrollSnapCoordinate": wms, "shapeImageThreshold": w, "shapeImageMargin": w, "shapeImageOutside": w, "hyphens": wmms, "flowInto": wms, "flowFrom": wms, "regionFragment": wms, "boxSizing": m, "textAlignLast": m, "tabSize": m, "wrapFlow": ms, "wrapThrough": ms, "wrapMargin": ms, "touchAction": ms, "gridTemplateColumns": ms, "gridTemplateRows": ms, "gridTemplateAreas": ms, "gridTemplate": ms, "gridAutoColumns": ms, "gridAutoRows": ms, "gridAutoFlow": ms, "grid": ms, "gridRowStart": ms, "gridColumnStart": ms, "gridRowEnd": ms, "gridRow": ms, "gridColumn": ms, "gridColumnEnd": ms, "gridColumnGap": ms, "gridRowGap": ms, "gridArea": ms, "gridGap": ms, "textSizeAdjust": wms, "borderImage": w, "borderImageOutset": w, "borderImageRepeat": w, "borderImageSlice": w, "borderImageSource": w, "borderImageWidth": w }
 };
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 var MAP_EXISTS = typeof Map !== 'undefined';
 
 var OrderedElements = function () {
@@ -821,13 +827,13 @@ var OrderedElements = function () {
     */
 
     function OrderedElements() {
-        babelHelpers.classCallCheck(this, OrderedElements);
+        _classCallCheck(this, OrderedElements);
 
         this.elements = {};
         this.keyOrder = [];
     }
 
-    babelHelpers.createClass(OrderedElements, [{
+    _createClass(OrderedElements, [{
         key: 'forEach',
         value: function () {
             function forEach(callback /* : (string, any) => void */) {
@@ -867,7 +873,7 @@ var OrderedElements = function () {
                     return;
                 }
 
-                if (!Array.isArray(value) && (typeof value === 'undefined' ? 'undefined' : babelHelpers['typeof'](value)) === 'object') {
+                if (!Array.isArray(value) && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object') {
                     // We have found a nested object, so we need to recurse so that all
                     // of the nested objects and Maps are merged properly.
                     var _nested = this.elements.hasOwnProperty(key) ? this.elements[key] : new OrderedElements();
@@ -923,6 +929,7 @@ var OrderedElements = function () {
             return addStyleType;
         }()
     }]);
+
     return OrderedElements;
 }();
 
@@ -1085,6 +1092,8 @@ var importantify = function importantify(string /* : string */) {
     );
 };
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 var prefixAll = createPrefixer(staticPrefixData);
 
 /* ::
@@ -1244,7 +1253,7 @@ var generateCSS = function generateCSS(selector /* : string */
                 // If the handler returned something, add it to the generated
                 // CSS and stop looking for another handler.
                 if (Array.isArray(result)) {
-                    generatedStyles.push.apply(generatedStyles, babelHelpers.toConsumableArray(result));
+                    generatedStyles.push.apply(generatedStyles, _toConsumableArray(result));
                 } else {
                     // eslint-disable-next-line
                     console.warn('WARNING: Selector handlers should return an array of rules.' + 'Returning a string containing multiple rules is deprecated.', handler);
@@ -1712,6 +1721,10 @@ RawTask.prototype.call = function () {
     }
 };
 
+var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+function _toConsumableArray$1(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 /* ::
 import type { SheetDefinition, SheetDefinitions } from './index.js';
 import type { MaybeSheetDefinition } from './exports.js';
@@ -1780,7 +1793,7 @@ var stringHandlers = {
         function fontFamily(val) {
             if (Array.isArray(val)) {
                 return val.map(fontFamily).join(",");
-            } else if ((typeof val === 'undefined' ? 'undefined' : babelHelpers['typeof'](val)) === "object") {
+            } else if ((typeof val === 'undefined' ? 'undefined' : _typeof$1(val)) === "object") {
                 injectStyleOnce(val.src, "@font-face", [val], false);
                 return '"' + String(val.fontFamily) + '"';
             } else {
@@ -1817,7 +1830,7 @@ var stringHandlers = {
                 return val.map(function (v) {
                     return animationName(v, selectorHandlers);
                 }).join(",");
-            } else if ((typeof val === 'undefined' ? 'undefined' : babelHelpers['typeof'](val)) === "object") {
+            } else if ((typeof val === 'undefined' ? 'undefined' : _typeof$1(val)) === "object") {
                 // Generate a unique name based on the hash of the object. We can't
                 // just use the hash because the name can't start with a number.
                 // TODO(emily): this probably makes debugging hard, allow a custom
@@ -1888,7 +1901,7 @@ var injectGeneratedCSSOnce = function injectGeneratedCSSOnce(key, generatedCSS) 
         browserAsap(flushToStyleTag);
     }
 
-    (_injectionBuffer = injectionBuffer).push.apply(_injectionBuffer, babelHelpers.toConsumableArray(generatedCSS));
+    (_injectionBuffer = injectionBuffer).push.apply(_injectionBuffer, _toConsumableArray$1(generatedCSS));
     alreadyInjected[key] = true;
 };
 

@@ -16,7 +16,7 @@
   "env": {
     "test": {
       "presets": ["airbnb"],
-      "plugins": ["istanbul", "external-helpers"],
+      "plugins": ["istanbul"],
     },
   },
 }
