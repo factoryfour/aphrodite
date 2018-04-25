@@ -42,8 +42,9 @@ describe('css', () => {
     });
 });
 
-it('no-important exports match default package exports', () => {
+it('no-important exports match default package exports, except for propTypes', () => {
     const defaultExports = require('../src/index');
+    delete defaultExports.types;
     const noImportantExports = require('../src/no-important');
     assert.hasAllKeys(noImportantExports, Object.keys(defaultExports));
 });
