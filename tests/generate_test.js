@@ -106,9 +106,10 @@ describe('generateCSS', () => {
                        stringHandlers = {}, useImportant = true) => {
         const actual = generateCSS(className, styleTypes, selectorHandlers,
                                    stringHandlers, useImportant);
-        const expectedNormalized = expected.split('\n').map(x => x.trim()).join('');
-        const formatStyles = (styles) => styles.replace(/(;|{|})/g, '$1\n');
-        assert.equal(
+        const expectedArray = [].concat(expected);
+        const expectedNormalized = expectedArray.map(rule => rule.split('\n').map(x => x.trim()).join(''));
+        const formatStyles = (styles) => styles.map(style => style.replace(/(;|{|})/g, '$1\n')).join('');
+        assert.deepEqual(
             actual,
             expectedNormalized,
             `
@@ -258,6 +259,34 @@ ${formatStyles(actual)}
         }`, defaultSelectorHandlers);
     });
 
+    it('orders overrides in the expected way', () => {
+        assertCSS('.foo', [
+            {
+                "@media (min-width: 400px)": {
+                    padding: 10,
+                }
+            },
+            {
+                "@media (min-width: 200px)": {
+                    padding: 20,
+                },
+                "@media (min-width: 400px)": {
+                    padding: 30,
+                }
+            }
+        ], [
+            `@media (min-width: 200px){
+            .foo{
+                padding:20px !important;
+            }
+        }`,
+            `@media (min-width: 400px){
+            .foo{
+                padding:30px !important;
+            }
+        }`], defaultSelectorHandlers);
+    });
+
     it('supports custom string handlers', () => {
         assertCSS('.foo', [{
             fontFamily: ["Helvetica", "sans-serif"]
@@ -317,7 +346,24 @@ ${formatStyles(actual)}
                 color: 'red',
             },
             color: 'blue',
-        }], '.foo{color:blue;}.bar .foo{color:red;}', [handler], {}, false);
+        }], ['.foo{color:blue;}','.bar .foo{color:red;}'], [handler], {}, false);
+    });
+
+    it('supports selector handlers that return strings containing multiple rules', () => {
+        const handler = (selector, baseSelector, callback) => {
+            if (selector[0] !== '^') {
+                return null;
+            }
+            const generatedBefore = callback(baseSelector + '::before');
+            const generatedAfter = callback(baseSelector + '::after');
+            return `${generatedBefore} ${generatedAfter}`;
+        };
+
+        assertCSS('.foo', [{
+            '^': {
+                color: 'red',
+            },
+        }], ['@media all {.foo::before{color:red;} .foo::after{color:red;}}'], [handler], {}, false);
     });
 
     it('correctly prefixes border-color transition properties', () => {

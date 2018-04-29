@@ -1,135 +1,1114 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["aphrodite"] = factory();
-	else
-		root["aphrodite"] = factory();
-})(this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
-/******/ 			return installedModules[moduleId].exports;
-/******/
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			exports: {},
-/******/ 			id: moduleId,
-/******/ 			loaded: false
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.loaded = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+	typeof define === 'function' && define.amd ? define(['exports'], factory) :
+	(factory((global.aphrodite = {})));
+}(this, (function (exports) { 'use strict';
 
-	module.exports = __webpack_require__(1);
+	var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
+	function unwrapExports (x) {
+		return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+	}
 
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+	function createCommonjsModule(fn, module) {
+		return module = { exports: {} }, fn(module, module.exports), module.exports;
+	}
 
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
+	var capitalizeString_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
 	});
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _generate = __webpack_require__(2);
-	
-	var _exports2 = __webpack_require__(28);
-	
-	var _exports3 = _interopRequireDefault(_exports2);
-	
-	var _types = __webpack_require__(33);
-	
-	var types = _interopRequireWildcard(_types);
-	
-	var useImportant = true; // Add !important to all style definitions
-	var _exports = (0, _exports3['default'])(useImportant, _generate.defaultSelectorHandlers);
-	
-	_exports.types = types;
-	
-	exports['default'] = _exports;
+	exports.default = capitalizeString;
+	function capitalizeString(str) {
+	  return str.charAt(0).toUpperCase() + str.slice(1);
+	}
+	module.exports = exports["default"];
+	});
+
+	var capitalizeString = unwrapExports(capitalizeString_1);
+
+	var capitalizeString$1 = /*#__PURE__*/Object.freeze({
+		default: capitalizeString,
+		__moduleExports: capitalizeString_1
+	});
+
+	var _capitalizeString = ( capitalizeString$1 && capitalizeString ) || capitalizeString$1;
+
+	var prefixProperty_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = prefixProperty;
+
+
+
+	var _capitalizeString2 = _interopRequireDefault(_capitalizeString);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function prefixProperty(prefixProperties, property, style) {
+	  if (prefixProperties.hasOwnProperty(property)) {
+	    var newStyle = {};
+	    var requiredPrefixes = prefixProperties[property];
+	    var capitalizedProperty = (0, _capitalizeString2.default)(property);
+	    var keys = Object.keys(style);
+	    for (var i = 0; i < keys.length; i++) {
+	      var styleProperty = keys[i];
+	      if (styleProperty === property) {
+	        for (var j = 0; j < requiredPrefixes.length; j++) {
+	          newStyle[requiredPrefixes[j] + capitalizedProperty] = style[property];
+	        }
+	      }
+	      newStyle[styleProperty] = style[styleProperty];
+	    }
+	    return newStyle;
+	  }
+	  return style;
+	}
+	module.exports = exports["default"];
+	});
+
+	var prefixProperty = unwrapExports(prefixProperty_1);
+
+	var prefixProperty$1 = /*#__PURE__*/Object.freeze({
+		default: prefixProperty,
+		__moduleExports: prefixProperty_1
+	});
+
+	var prefixValue_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = prefixValue;
+	function prefixValue(plugins, property, value, style, metaData) {
+	  for (var i = 0, len = plugins.length; i < len; ++i) {
+	    var processedValue = plugins[i](property, value, style, metaData);
+
+	    // we can stop processing if a value is returned
+	    // as all plugin criteria are unique
+	    if (processedValue) {
+	      return processedValue;
+	    }
+	  }
+	}
+	module.exports = exports["default"];
+	});
+
+	var prefixValue = unwrapExports(prefixValue_1);
+
+	var prefixValue$1 = /*#__PURE__*/Object.freeze({
+		default: prefixValue,
+		__moduleExports: prefixValue_1
+	});
+
+	var addNewValuesOnly_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = addNewValuesOnly;
+	function addIfNew(list, value) {
+	  if (list.indexOf(value) === -1) {
+	    list.push(value);
+	  }
+	}
+
+	function addNewValuesOnly(list, values) {
+	  if (Array.isArray(values)) {
+	    for (var i = 0, len = values.length; i < len; ++i) {
+	      addIfNew(list, values[i]);
+	    }
+	  } else {
+	    addIfNew(list, values);
+	  }
+	}
+	module.exports = exports["default"];
+	});
+
+	var addNewValuesOnly = unwrapExports(addNewValuesOnly_1);
+
+	var addNewValuesOnly$1 = /*#__PURE__*/Object.freeze({
+		default: addNewValuesOnly,
+		__moduleExports: addNewValuesOnly_1
+	});
+
+	var isObject_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = isObject;
+	function isObject(value) {
+	  return value instanceof Object && !Array.isArray(value);
+	}
+	module.exports = exports["default"];
+	});
+
+	var isObject = unwrapExports(isObject_1);
+
+	var isObject$1 = /*#__PURE__*/Object.freeze({
+		default: isObject,
+		__moduleExports: isObject_1
+	});
+
+	var _prefixProperty = ( prefixProperty$1 && prefixProperty ) || prefixProperty$1;
+
+	var _prefixValue = ( prefixValue$1 && prefixValue ) || prefixValue$1;
+
+	var _addNewValuesOnly = ( addNewValuesOnly$1 && addNewValuesOnly ) || addNewValuesOnly$1;
+
+	var _isObject = ( isObject$1 && isObject ) || isObject$1;
+
+	var createPrefixer_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = createPrefixer;
+
+
+
+	var _prefixProperty2 = _interopRequireDefault(_prefixProperty);
+
+
+
+	var _prefixValue2 = _interopRequireDefault(_prefixValue);
+
+
+
+	var _addNewValuesOnly2 = _interopRequireDefault(_addNewValuesOnly);
+
+
+
+	var _isObject2 = _interopRequireDefault(_isObject);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function createPrefixer(_ref) {
+	  var prefixMap = _ref.prefixMap,
+	      plugins = _ref.plugins;
+
+	  function prefixAll(style) {
+	    for (var property in style) {
+	      var value = style[property];
+
+	      // handle nested objects
+	      if ((0, _isObject2.default)(value)) {
+	        style[property] = prefixAll(value);
+	        // handle array values
+	      } else if (Array.isArray(value)) {
+	        var combinedValue = [];
+
+	        for (var i = 0, len = value.length; i < len; ++i) {
+	          var processedValue = (0, _prefixValue2.default)(plugins, property, value[i], style, prefixMap);
+	          (0, _addNewValuesOnly2.default)(combinedValue, processedValue || value[i]);
+	        }
+
+	        // only modify the value if it was touched
+	        // by any plugin to prevent unnecessary mutations
+	        if (combinedValue.length > 0) {
+	          style[property] = combinedValue;
+	        }
+	      } else {
+	        var _processedValue = (0, _prefixValue2.default)(plugins, property, value, style, prefixMap);
+
+	        // only modify the value if it was touched
+	        // by any plugin to prevent unnecessary mutations
+	        if (_processedValue) {
+	          style[property] = _processedValue;
+	        }
+
+	        style = (0, _prefixProperty2.default)(prefixMap, property, style);
+	      }
+	    }
+
+	    return style;
+	  }
+
+	  return prefixAll;
+	}
+	module.exports = exports["default"];
+	});
+
+	var createPrefixer = unwrapExports(createPrefixer_1);
+
+	var isPrefixedValue_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = isPrefixedValue;
+	var regex = /-webkit-|-moz-|-ms-/;
+
+	function isPrefixedValue(value) {
+	  return typeof value === 'string' && regex.test(value);
+	}
 	module.exports = exports['default'];
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
 	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _inlineStylePrefixerStaticCreatePrefixer = __webpack_require__(3);
-	
-	var _inlineStylePrefixerStaticCreatePrefixer2 = _interopRequireDefault(_inlineStylePrefixerStaticCreatePrefixer);
-	
-	var _libStaticPrefixData = __webpack_require__(9);
-	
-	var _libStaticPrefixData2 = _interopRequireDefault(_libStaticPrefixData);
-	
-	var _orderedElements = __webpack_require__(25);
-	
-	var _orderedElements2 = _interopRequireDefault(_orderedElements);
-	
-	var _util = __webpack_require__(26);
-	
-	var prefixAll = (0, _inlineStylePrefixerStaticCreatePrefixer2['default'])(_libStaticPrefixData2['default']);
-	
+
+	var isPrefixedValue = unwrapExports(isPrefixedValue_1);
+
+	var isPrefixedValue$1 = /*#__PURE__*/Object.freeze({
+		default: isPrefixedValue,
+		__moduleExports: isPrefixedValue_1
+	});
+
+	var _isPrefixedValue = ( isPrefixedValue$1 && isPrefixedValue ) || isPrefixedValue$1;
+
+	var calc_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = calc;
+
+
+
+	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var prefixes = ["-webkit-", "-moz-", ""];
+	function calc(property, value) {
+	  if (typeof value === "string" && !(0, _isPrefixedValue2.default)(value) && value.indexOf("calc(") > -1) {
+	    return prefixes.map(function (prefix) {
+	      return value.replace(/calc\(/g, prefix + "calc(");
+	    });
+	  }
+	}
+	module.exports = exports["default"];
+	});
+
+	var calc = unwrapExports(calc_1);
+
+	var calc$1 = /*#__PURE__*/Object.freeze({
+		default: calc,
+		__moduleExports: calc_1
+	});
+
+	var crossFade_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = crossFade;
+
+
+
+	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// http://caniuse.com/#search=cross-fade
+	var prefixes = ["-webkit-", ""];
+	function crossFade(property, value) {
+	  if (typeof value === "string" && !(0, _isPrefixedValue2.default)(value) && value.indexOf("cross-fade(") > -1) {
+	    return prefixes.map(function (prefix) {
+	      return value.replace(/cross-fade\(/g, prefix + "cross-fade(");
+	    });
+	  }
+	}
+	module.exports = exports["default"];
+	});
+
+	var crossFade = unwrapExports(crossFade_1);
+
+	var crossFade$1 = /*#__PURE__*/Object.freeze({
+		default: crossFade,
+		__moduleExports: crossFade_1
+	});
+
+	var cursor_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = cursor;
+	var prefixes = ["-webkit-", "-moz-", ""];
+
+	var values = {
+	  "zoom-in": true,
+	  "zoom-out": true,
+	  grab: true,
+	  grabbing: true
+	};
+
+	function cursor(property, value) {
+	  if (property === "cursor" && values.hasOwnProperty(value)) {
+	    return prefixes.map(function (prefix) {
+	      return prefix + value;
+	    });
+	  }
+	}
+	module.exports = exports["default"];
+	});
+
+	var cursor = unwrapExports(cursor_1);
+
+	var cursor$1 = /*#__PURE__*/Object.freeze({
+		default: cursor,
+		__moduleExports: cursor_1
+	});
+
+	var filter_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = filter;
+
+
+
+	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// http://caniuse.com/#feat=css-filter-function
+	var prefixes = ["-webkit-", ""];
+	function filter(property, value) {
+	  if (typeof value === "string" && !(0, _isPrefixedValue2.default)(value) && value.indexOf("filter(") > -1) {
+	    return prefixes.map(function (prefix) {
+	      return value.replace(/filter\(/g, prefix + "filter(");
+	    });
+	  }
+	}
+	module.exports = exports["default"];
+	});
+
+	var filter = unwrapExports(filter_1);
+
+	var filter$1 = /*#__PURE__*/Object.freeze({
+		default: filter,
+		__moduleExports: filter_1
+	});
+
+	var flex_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = flex;
+	var values = {
+	  flex: ["-webkit-box", "-moz-box", "-ms-flexbox", "-webkit-flex", "flex"],
+	  "inline-flex": ["-webkit-inline-box", "-moz-inline-box", "-ms-inline-flexbox", "-webkit-inline-flex", "inline-flex"]
+	};
+
+	function flex(property, value) {
+	  if (property === "display" && values.hasOwnProperty(value)) {
+	    return values[value];
+	  }
+	}
+	module.exports = exports["default"];
+	});
+
+	var flex = unwrapExports(flex_1);
+
+	var flex$1 = /*#__PURE__*/Object.freeze({
+		default: flex,
+		__moduleExports: flex_1
+	});
+
+	var flexboxIE_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = flexboxIE;
+	var alternativeValues = {
+	  "space-around": "distribute",
+	  "space-between": "justify",
+	  "flex-start": "start",
+	  "flex-end": "end"
+	};
+	var alternativeProps = {
+	  alignContent: "msFlexLinePack",
+	  alignSelf: "msFlexItemAlign",
+	  alignItems: "msFlexAlign",
+	  justifyContent: "msFlexPack",
+	  order: "msFlexOrder",
+	  flexGrow: "msFlexPositive",
+	  flexShrink: "msFlexNegative",
+	  flexBasis: "msFlexPreferredSize"
+	};
+
+	function flexboxIE(property, value, style) {
+	  if (alternativeProps.hasOwnProperty(property)) {
+	    style[alternativeProps[property]] = alternativeValues[value] || value;
+	  }
+	}
+	module.exports = exports["default"];
+	});
+
+	var flexboxIE = unwrapExports(flexboxIE_1);
+
+	var flexboxIE$1 = /*#__PURE__*/Object.freeze({
+		default: flexboxIE,
+		__moduleExports: flexboxIE_1
+	});
+
+	var flexboxOld_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = flexboxOld;
+	var alternativeValues = {
+	  "space-around": "justify",
+	  "space-between": "justify",
+	  "flex-start": "start",
+	  "flex-end": "end",
+	  "wrap-reverse": "multiple",
+	  wrap: "multiple"
+	};
+
+	var alternativeProps = {
+	  alignItems: "WebkitBoxAlign",
+	  justifyContent: "WebkitBoxPack",
+	  flexWrap: "WebkitBoxLines"
+	};
+
+	function flexboxOld(property, value, style) {
+	  if (property === "flexDirection" && typeof value === "string") {
+	    if (value.indexOf("column") > -1) {
+	      style.WebkitBoxOrient = "vertical";
+	    } else {
+	      style.WebkitBoxOrient = "horizontal";
+	    }
+	    if (value.indexOf("reverse") > -1) {
+	      style.WebkitBoxDirection = "reverse";
+	    } else {
+	      style.WebkitBoxDirection = "normal";
+	    }
+	  }
+	  if (alternativeProps.hasOwnProperty(property)) {
+	    style[alternativeProps[property]] = alternativeValues[value] || value;
+	  }
+	}
+	module.exports = exports["default"];
+	});
+
+	var flexboxOld = unwrapExports(flexboxOld_1);
+
+	var flexboxOld$1 = /*#__PURE__*/Object.freeze({
+		default: flexboxOld,
+		__moduleExports: flexboxOld_1
+	});
+
+	var gradient_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = gradient;
+
+
+
+	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var prefixes = ["-webkit-", "-moz-", ""];
+
+	var values = /linear-gradient|radial-gradient|repeating-linear-gradient|repeating-radial-gradient/;
+
+	function gradient(property, value) {
+	  if (typeof value === "string" && !(0, _isPrefixedValue2.default)(value) && values.test(value)) {
+	    return prefixes.map(function (prefix) {
+	      return prefix + value;
+	    });
+	  }
+	}
+	module.exports = exports["default"];
+	});
+
+	var gradient = unwrapExports(gradient_1);
+
+	var gradient$1 = /*#__PURE__*/Object.freeze({
+		default: gradient,
+		__moduleExports: gradient_1
+	});
+
+	var imageSet_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = imageSet;
+
+
+
+	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// http://caniuse.com/#feat=css-image-set
+	var prefixes = ["-webkit-", ""];
+	function imageSet(property, value) {
+	  if (typeof value === "string" && !(0, _isPrefixedValue2.default)(value) && value.indexOf("image-set(") > -1) {
+	    return prefixes.map(function (prefix) {
+	      return value.replace(/image-set\(/g, prefix + "image-set(");
+	    });
+	  }
+	}
+	module.exports = exports["default"];
+	});
+
+	var imageSet = unwrapExports(imageSet_1);
+
+	var imageSet$1 = /*#__PURE__*/Object.freeze({
+		default: imageSet,
+		__moduleExports: imageSet_1
+	});
+
+	var position_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = position;
+	function position(property, value) {
+	  if (property === "position" && value === "sticky") {
+	    return ["-webkit-sticky", "sticky"];
+	  }
+	}
+	module.exports = exports["default"];
+	});
+
+	var position = unwrapExports(position_1);
+
+	var position$1 = /*#__PURE__*/Object.freeze({
+		default: position,
+		__moduleExports: position_1
+	});
+
+	var sizing_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = sizing;
+	var prefixes = ["-webkit-", "-moz-", ""];
+
+	var properties = {
+	  maxHeight: true,
+	  maxWidth: true,
+	  width: true,
+	  height: true,
+	  columnWidth: true,
+	  minWidth: true,
+	  minHeight: true
+	};
+	var values = {
+	  "min-content": true,
+	  "max-content": true,
+	  "fill-available": true,
+	  "fit-content": true,
+	  "contain-floats": true
+	};
+
+	function sizing(property, value) {
+	  if (properties.hasOwnProperty(property) && values.hasOwnProperty(value)) {
+	    return prefixes.map(function (prefix) {
+	      return prefix + value;
+	    });
+	  }
+	}
+	module.exports = exports["default"];
+	});
+
+	var sizing = unwrapExports(sizing_1);
+
+	var sizing$1 = /*#__PURE__*/Object.freeze({
+		default: sizing,
+		__moduleExports: sizing_1
+	});
+
+	var uppercasePattern = /[A-Z]/g;
+	var msPattern = /^ms-/;
+	var cache = {};
+
+	function hyphenateStyleName(string) {
+	    return string in cache
+	    ? cache[string]
+	    : cache[string] = string
+	      .replace(uppercasePattern, '-$&')
+	      .toLowerCase()
+	      .replace(msPattern, '-ms-');
+	}
+
+	var hyphenateStyleName_1 = hyphenateStyleName;
+
+	var hyphenateStyleName$1 = /*#__PURE__*/Object.freeze({
+		default: hyphenateStyleName_1,
+		__moduleExports: hyphenateStyleName_1
+	});
+
+	var _hyphenateStyleName = ( hyphenateStyleName$1 && hyphenateStyleName_1 ) || hyphenateStyleName$1;
+
+	var hyphenateProperty_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = hyphenateProperty;
+
+
+
+	var _hyphenateStyleName2 = _interopRequireDefault(_hyphenateStyleName);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function hyphenateProperty(property) {
+	  return (0, _hyphenateStyleName2.default)(property);
+	}
+	module.exports = exports['default'];
+	});
+
+	var hyphenateProperty = unwrapExports(hyphenateProperty_1);
+
+	var hyphenateProperty$1 = /*#__PURE__*/Object.freeze({
+		default: hyphenateProperty,
+		__moduleExports: hyphenateProperty_1
+	});
+
+	var _hyphenateProperty = ( hyphenateProperty$1 && hyphenateProperty ) || hyphenateProperty$1;
+
+	var transition_1 = createCommonjsModule(function (module, exports) {
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = transition;
+
+
+
+	var _hyphenateProperty2 = _interopRequireDefault(_hyphenateProperty);
+
+
+
+	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
+
+
+
+	var _capitalizeString2 = _interopRequireDefault(_capitalizeString);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var properties = {
+	  transition: true,
+	  transitionProperty: true,
+	  WebkitTransition: true,
+	  WebkitTransitionProperty: true,
+	  MozTransition: true,
+	  MozTransitionProperty: true
+	};
+
+
+	var prefixMapping = {
+	  Webkit: "-webkit-",
+	  Moz: "-moz-",
+	  ms: "-ms-"
+	};
+
+	function prefixValue(value, propertyPrefixMap) {
+	  if ((0, _isPrefixedValue2.default)(value)) {
+	    return value;
+	  }
+
+	  // only split multi values, not cubic beziers
+	  var multipleValues = value.split(/,(?![^()]*(?:\([^()]*\))?\))/g);
+
+	  for (var i = 0, len = multipleValues.length; i < len; ++i) {
+	    var singleValue = multipleValues[i];
+	    var values = [singleValue];
+	    for (var property in propertyPrefixMap) {
+	      var dashCaseProperty = (0, _hyphenateProperty2.default)(property);
+
+	      if (singleValue.indexOf(dashCaseProperty) > -1 && dashCaseProperty !== "order") {
+	        var prefixes = propertyPrefixMap[property];
+	        for (var j = 0, pLen = prefixes.length; j < pLen; ++j) {
+	          // join all prefixes and create a new value
+	          values.unshift(singleValue.replace(dashCaseProperty, prefixMapping[prefixes[j]] + dashCaseProperty));
+	        }
+	      }
+	    }
+
+	    multipleValues[i] = values.join(",");
+	  }
+
+	  return multipleValues.join(",");
+	}
+
+	function transition(property, value, style, propertyPrefixMap) {
+	  // also check for already prefixed transitions
+	  if (typeof value === "string" && properties.hasOwnProperty(property)) {
+	    var outputValue = prefixValue(value, propertyPrefixMap);
+	    // if the property is already prefixed
+	    var webkitOutput = outputValue.split(/,(?![^()]*(?:\([^()]*\))?\))/g).filter(function (val) {
+	      return !/-moz-|-ms-/.test(val);
+	    }).join(",");
+
+	    if (property.indexOf("Webkit") > -1) {
+	      return webkitOutput;
+	    }
+
+	    var mozOutput = outputValue.split(/,(?![^()]*(?:\([^()]*\))?\))/g).filter(function (val) {
+	      return !/-webkit-|-ms-/.test(val);
+	    }).join(",");
+
+	    if (property.indexOf("Moz") > -1) {
+	      return mozOutput;
+	    }
+
+	    style["Webkit" + (0, _capitalizeString2.default)(property)] = webkitOutput;
+	    style["Moz" + (0, _capitalizeString2.default)(property)] = mozOutput;
+	    return outputValue;
+	  }
+	}
+	module.exports = exports["default"];
+	});
+
+	var transition = unwrapExports(transition_1);
+
+	var transition$1 = /*#__PURE__*/Object.freeze({
+		default: transition,
+		__moduleExports: transition_1
+	});
+
+	var calc$2 = ( calc$1 && calc ) || calc$1;
+
+	var crossFade$2 = ( crossFade$1 && crossFade ) || crossFade$1;
+
+	var cursor$2 = ( cursor$1 && cursor ) || cursor$1;
+
+	var filter$2 = ( filter$1 && filter ) || filter$1;
+
+	var flex$2 = ( flex$1 && flex ) || flex$1;
+
+	var flexboxIE$2 = ( flexboxIE$1 && flexboxIE ) || flexboxIE$1;
+
+	var flexboxOld$2 = ( flexboxOld$1 && flexboxOld ) || flexboxOld$1;
+
+	var gradient$2 = ( gradient$1 && gradient ) || gradient$1;
+
+	var imageSet$2 = ( imageSet$1 && imageSet ) || imageSet$1;
+
+	var position$2 = ( position$1 && position ) || position$1;
+
+	var sizing$2 = ( sizing$1 && sizing ) || sizing$1;
+
+	var transition$2 = ( transition$1 && transition ) || transition$1;
+
+	var w = ["Webkit"];
+	var m = ["Moz"];
+	var ms = ["ms"];
+	var wm = ["Webkit", "Moz"];
+	var wms = ["Webkit", "ms"];
+	var wmms = ["Webkit", "Moz", "ms"];
+
+	var staticPrefixData = {
+	  plugins: [calc$2, crossFade$2, cursor$2, filter$2, flex$2, flexboxIE$2, flexboxOld$2, gradient$2, imageSet$2, position$2, sizing$2, transition$2],
+	  prefixMap: { "transform": wms, "transformOrigin": wms, "transformOriginX": wms, "transformOriginY": wms, "backfaceVisibility": w, "perspective": w, "perspectiveOrigin": w, "transformStyle": w, "transformOriginZ": w, "animation": w, "animationDelay": w, "animationDirection": w, "animationFillMode": w, "animationDuration": w, "animationIterationCount": w, "animationName": w, "animationPlayState": w, "animationTimingFunction": w, "appearance": wm, "userSelect": wmms, "fontKerning": w, "textEmphasisPosition": w, "textEmphasis": w, "textEmphasisStyle": w, "textEmphasisColor": w, "boxDecorationBreak": w, "clipPath": w, "maskImage": w, "maskMode": w, "maskRepeat": w, "maskPosition": w, "maskClip": w, "maskOrigin": w, "maskSize": w, "maskComposite": w, "mask": w, "maskBorderSource": w, "maskBorderMode": w, "maskBorderSlice": w, "maskBorderWidth": w, "maskBorderOutset": w, "maskBorderRepeat": w, "maskBorder": w, "maskType": w, "textDecorationStyle": wm, "textDecorationSkip": wm, "textDecorationLine": wm, "textDecorationColor": wm, "filter": w, "fontFeatureSettings": wm, "breakAfter": wmms, "breakBefore": wmms, "breakInside": wmms, "columnCount": wm, "columnFill": wm, "columnGap": wm, "columnRule": wm, "columnRuleColor": wm, "columnRuleStyle": wm, "columnRuleWidth": wm, "columns": wm, "columnSpan": wm, "columnWidth": wm, "writingMode": wms, "flex": wms, "flexBasis": w, "flexDirection": wms, "flexGrow": w, "flexFlow": wms, "flexShrink": w, "flexWrap": wms, "alignContent": w, "alignItems": w, "alignSelf": w, "justifyContent": w, "order": w, "transitionDelay": w, "transitionDuration": w, "transitionProperty": w, "transitionTimingFunction": w, "backdropFilter": w, "scrollSnapType": wms, "scrollSnapPointsX": wms, "scrollSnapPointsY": wms, "scrollSnapDestination": wms, "scrollSnapCoordinate": wms, "shapeImageThreshold": w, "shapeImageMargin": w, "shapeImageOutside": w, "hyphens": wmms, "flowInto": wms, "flowFrom": wms, "regionFragment": wms, "boxSizing": m, "textAlignLast": m, "tabSize": m, "wrapFlow": ms, "wrapThrough": ms, "wrapMargin": ms, "touchAction": ms, "gridTemplateColumns": ms, "gridTemplateRows": ms, "gridTemplateAreas": ms, "gridTemplate": ms, "gridAutoColumns": ms, "gridAutoRows": ms, "gridAutoFlow": ms, "grid": ms, "gridRowStart": ms, "gridColumnStart": ms, "gridRowEnd": ms, "gridRow": ms, "gridColumn": ms, "gridColumnEnd": ms, "gridColumnGap": ms, "gridRowGap": ms, "gridArea": ms, "gridGap": ms, "textSizeAdjust": wms, "borderImage": w, "borderImageOutset": w, "borderImageRepeat": w, "borderImageSlice": w, "borderImageSource": w, "borderImageWidth": w }
+	};
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var MAP_EXISTS = typeof Map !== 'undefined';
+
+	var OrderedElements = function () {
+	    /* ::
+	    elements: {[string]: any};
+	    keyOrder: string[];
+	    */
+
+	    function OrderedElements() {
+	        _classCallCheck(this, OrderedElements);
+
+	        this.elements = {};
+	        this.keyOrder = [];
+	    }
+
+	    _createClass(OrderedElements, [{
+	        key: 'forEach',
+	        value: function () {
+	            function forEach(callback /* : (string, any) => void */) {
+	                for (var i = 0; i < this.keyOrder.length; i++) {
+	                    // (value, key) to match Map's API
+	                    callback(this.elements[this.keyOrder[i]], this.keyOrder[i]);
+	                }
+	            }
+
+	            return forEach;
+	        }()
+	    }, {
+	        key: 'set',
+	        value: function () {
+	            function set(key /* : string */, value /* : any */, shouldReorder /* : ?boolean */) {
+	                if (!this.elements.hasOwnProperty(key)) {
+	                    this.keyOrder.push(key);
+	                } else if (shouldReorder) {
+	                    var index = this.keyOrder.indexOf(key);
+	                    this.keyOrder.splice(index, 1);
+	                    this.keyOrder.push(key);
+	                }
+
+	                if (value == null) {
+	                    this.elements[key] = value;
+	                    return;
+	                }
+
+	                if (MAP_EXISTS && value instanceof Map || value instanceof OrderedElements) {
+	                    // We have found a nested Map, so we need to recurse so that all
+	                    // of the nested objects and Maps are merged properly.
+	                    var nested = this.elements.hasOwnProperty(key) ? this.elements[key] : new OrderedElements();
+	                    value.forEach(function (value, key) {
+	                        nested.set(key, value, shouldReorder);
+	                    });
+	                    this.elements[key] = nested;
+	                    return;
+	                }
+
+	                if (!Array.isArray(value) && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object') {
+	                    // We have found a nested object, so we need to recurse so that all
+	                    // of the nested objects and Maps are merged properly.
+	                    var _nested = this.elements.hasOwnProperty(key) ? this.elements[key] : new OrderedElements();
+	                    var keys = Object.keys(value);
+	                    for (var i = 0; i < keys.length; i += 1) {
+	                        _nested.set(keys[i], value[keys[i]], shouldReorder);
+	                    }
+	                    this.elements[key] = _nested;
+	                    return;
+	                }
+
+	                this.elements[key] = value;
+	            }
+
+	            return set;
+	        }()
+	    }, {
+	        key: 'get',
+	        value: function () {
+	            function get(key /* : string */) /* : any */{
+	                return this.elements[key];
+	            }
+
+	            return get;
+	        }()
+	    }, {
+	        key: 'has',
+	        value: function () {
+	            function has(key /* : string */) /* : boolean */{
+	                return this.elements.hasOwnProperty(key);
+	            }
+
+	            return has;
+	        }()
+	    }, {
+	        key: 'addStyleType',
+	        value: function () {
+	            function addStyleType(styleType /* : any */) /* : void */{
+	                var _this = this;
+
+	                if (MAP_EXISTS && styleType instanceof Map || styleType instanceof OrderedElements) {
+	                    styleType.forEach(function (value, key) {
+	                        _this.set(key, value, true);
+	                    });
+	                } else {
+	                    var keys = Object.keys(styleType);
+	                    for (var i = 0; i < keys.length; i++) {
+	                        this.set(keys[i], styleType[keys[i]], true);
+	                    }
+	                }
+	            }
+
+	            return addStyleType;
+	        }()
+	    }]);
+
+	    return OrderedElements;
+	}();
+
+	function hash(str) {
+	  var hash = 5381,
+	      i    = str.length;
+
+	  while(i) {
+	    hash = (hash * 33) ^ str.charCodeAt(--i);
+	  }
+
+	  /* JavaScript does bitwise operations (like XOR, above) on 32-bit signed
+	   * integers. Since we want the results to be always positive, convert the
+	   * signed int to an unsigned by doing an unsigned bitshift. */
+	  return hash >>> 0;
+	}
+
+	var stringHash = hash;
+
+	/* ::
+	type ObjectMap = { [id:string]: any };
+	*/
+
+	var UPPERCASE_RE = /([A-Z])/g;
+	var UPPERCASE_RE_TO_KEBAB = function UPPERCASE_RE_TO_KEBAB(match /* : string */) {
+	    return (/* : string */'-' + String(match.toLowerCase())
+	    );
+	};
+
+	var kebabifyStyleName = function kebabifyStyleName(string /* : string */) /* : string */{
+	    var result = string.replace(UPPERCASE_RE, UPPERCASE_RE_TO_KEBAB);
+	    if (result[0] === 'm' && result[1] === 's' && result[2] === '-') {
+	        return '-' + String(result);
+	    }
+	    return result;
+	};
+
+	/**
+	 * CSS properties which accept numbers but are not in units of "px".
+	 * Taken from React's CSSProperty.js
+	 */
+	var isUnitlessNumber = {
+	    animationIterationCount: true,
+	    borderImageOutset: true,
+	    borderImageSlice: true,
+	    borderImageWidth: true,
+	    boxFlex: true,
+	    boxFlexGroup: true,
+	    boxOrdinalGroup: true,
+	    columnCount: true,
+	    flex: true,
+	    flexGrow: true,
+	    flexPositive: true,
+	    flexShrink: true,
+	    flexNegative: true,
+	    flexOrder: true,
+	    gridRow: true,
+	    gridColumn: true,
+	    fontWeight: true,
+	    lineClamp: true,
+	    lineHeight: true,
+	    opacity: true,
+	    order: true,
+	    orphans: true,
+	    tabSize: true,
+	    widows: true,
+	    zIndex: true,
+	    zoom: true,
+
+	    // SVG-related properties
+	    fillOpacity: true,
+	    floodOpacity: true,
+	    stopOpacity: true,
+	    strokeDasharray: true,
+	    strokeDashoffset: true,
+	    strokeMiterlimit: true,
+	    strokeOpacity: true,
+	    strokeWidth: true
+	};
+
+	/**
+	 * Taken from React's CSSProperty.js
+	 *
+	 * @param {string} prefix vendor-specific prefix, eg: Webkit
+	 * @param {string} key style name, eg: transitionDuration
+	 * @return {string} style name prefixed with `prefix`, properly camelCased, eg:
+	 * WebkitTransitionDuration
+	 */
+	function prefixKey(prefix, key) {
+	    return prefix + key.charAt(0).toUpperCase() + key.substring(1);
+	}
+
+	/**
+	 * Support style names that may come passed in prefixed by adding permutations
+	 * of vendor prefixes.
+	 * Taken from React's CSSProperty.js
+	 */
+	var prefixes = ['Webkit', 'ms', 'Moz', 'O'];
+
+	// Using Object.keys here, or else the vanilla for-in loop makes IE8 go into an
+	// infinite loop, because it iterates over the newly added props too.
+	// Taken from React's CSSProperty.js
+	Object.keys(isUnitlessNumber).forEach(function (prop) {
+	    prefixes.forEach(function (prefix) {
+	        isUnitlessNumber[prefixKey(prefix, prop)] = isUnitlessNumber[prop];
+	    });
+	});
+
+	var stringifyValue = function stringifyValue(key /* : string */
+	, prop /* : any */
+	) /* : string */{
+	    if (typeof prop === "number") {
+	        if (isUnitlessNumber[key]) {
+	            return "" + prop;
+	        } else {
+	            return prop + "px";
+	        }
+	    } else {
+	        return '' + prop;
+	    }
+	};
+
+	var stringifyAndImportantifyValue = function stringifyAndImportantifyValue(key /* : string */
+	, prop /* : any */
+	) {
+	    return (/* : string */importantify(stringifyValue(key, prop))
+	    );
+	};
+
+	// Turn a string into a hash string of base-36 values (using letters and numbers)
+	// eslint-disable-next-line no-unused-vars
+	var hashString = function hashString(string /* : string */, key /* : ?string */) {
+	    return (/* string */stringHash(string).toString(36)
+	    );
+	};
+
+	// Hash a javascript object using JSON.stringify. This is very fast, about 3
+	// microseconds on my computer for a sample object:
+	// http://jsperf.com/test-hashfnv32a-hash/5
+	//
+	// Note that this uses JSON.stringify to stringify the objects so in order for
+	// this to produce consistent hashes browsers need to have a consistent
+	// ordering of objects. Ben Alpert says that Facebook depends on this, so we
+	// can probably depend on this too.
+	var hashObject = function hashObject(object /* : ObjectMap */) {
+	    return (/* : string */hashString(JSON.stringify(object))
+	    );
+	};
+
+	// Given a single style value string like the "b" from "a: b;", adds !important
+	// to generate "b !important".
+	var importantify = function importantify(string /* : string */) {
+	    return (/* : string */
+	        // Bracket string character access is very fast, and in the default case we
+	        // normally don't expect there to be "!important" at the end of the string
+	        // so we can use this simple check to take an optimized path. If there
+	        // happens to be a "!" in this position, we follow up with a more thorough
+	        // check.
+	        string[string.length - 10] === '!' && string.slice(-11) === ' !important' ? string : String(string) + ' !important'
+	    );
+	};
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	var prefixAll = createPrefixer(staticPrefixData);
+
 	/* ::
 	import type { SheetDefinition } from './index.js';
 	type StringHandlers = { [id:string]: Function };
-	type SelectorCallback = (selector: string) => any;
+	type SelectorCallback = (selector: string) => string[];
 	export type SelectorHandler = (
 	    selector: string,
 	    baseSelector: string,
 	    callback: SelectorCallback
-	) => string | null;
+	) => string[] | string | null;
 	*/
-	
+
 	/**
 	 * `selectorHandlers` are functions which handle special selectors which act
 	 * differently than normal style definitions. These functions look at the
@@ -157,9 +1136,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   callback('.foo:nth-child(2n):hover')
 	 *
 	 * to generate its subtree `{ color: 'red' }` styles with a
-	 * '.foo:nth-child(2n):hover' selector. The callback would return CSS like
+	 * '.foo:nth-child(2n):hover' selector. The callback would return an array of CSS
+	 * rules like
 	 *
-	 *   '.foo:nth-child(2n):hover{color:red !important;}'
+	 *   ['.foo:nth-child(2n):hover{color:red !important;}']
 	 *
 	 * and the handler would then return that resulting CSS.
 	 *
@@ -175,35 +1155,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @param {function} generateSubtreeStyles: A function which can be called to
 	 *     generate CSS for the subtree of styles corresponding to the selector.
 	 *     Accepts a new baseSelector to use for generating those styles.
-	 * @returns {?string} The generated CSS for this selector, or null if we don't
-	 *     handle this selector.
+	 * @returns {string[] | string | null} The generated CSS for this selector, or
+	 *     null if we don't handle this selector.
 	 */
-	var defaultSelectorHandlers = [
+	var defaultSelectorHandlers /* : SelectorHandler[] */ = [
 	// Handle pseudo-selectors, like :hover and :nth-child(3n)
-	function pseudoSelectors(selector, /* : string */
-	baseSelector, /* : string */
-	generateSubtreeStyles /* : Function */
-	) /* */{
-	    if (selector[0] !== ":") {
-	        return null;
+	function () {
+	    function pseudoSelectors(selector, baseSelector, generateSubtreeStyles) {
+	        if (selector[0] !== ":") {
+	            return null;
+	        }
+	        return generateSubtreeStyles(baseSelector + selector);
 	    }
-	    return generateSubtreeStyles(baseSelector + selector);
-	},
-	
+
+	    return pseudoSelectors;
+	}(),
+
 	// Handle media queries (or font-faces)
-	function mediaQueries(selector, /* : string */
-	baseSelector, /* : string */
-	generateSubtreeStyles /* : Function */
-	) /* */{
-	    if (selector[0] !== "@") {
-	        return null;
+	function () {
+	    function mediaQueries(selector, baseSelector, generateSubtreeStyles) {
+	        if (selector[0] !== "@") {
+	            return null;
+	        }
+	        // Generate the styles normally, and then wrap them in the media query.
+	        var generated = generateSubtreeStyles(baseSelector);
+	        return [String(selector) + '{' + String(generated.join('')) + '}'];
 	    }
-	    // Generate the styles normally, and then wrap them in the media query.
-	    var generated = generateSubtreeStyles(baseSelector);
-	    return selector + '{' + generated + '}';
-	}];
-	
-	exports.defaultSelectorHandlers = defaultSelectorHandlers;
+
+	    return mediaQueries;
+	}()];
+
 	/**
 	 * Generate CSS for a selector and some styles.
 	 *
@@ -247,21 +1228,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     generateCSSRuleset(".foo", { height: 20 }, ...)
 	 *     generateCSSRuleset(".foo:hover", { backgroundColor: "black" }, ...)
 	 */
-	var generateCSS = function generateCSS(selector, /* : string */
-	styleTypes, /* : SheetDefinition[] */
-	selectorHandlers, /* : SelectorHandler[] */
-	stringHandlers, /* : StringHandlers */
-	useImportant /* : boolean */
-	) /* : string */{
-	    var merged = new _orderedElements2['default']();
-	
+	var generateCSS = function generateCSS(selector /* : string */
+	, styleTypes /* : SheetDefinition[] */
+	, selectorHandlers /* : SelectorHandler[] */
+	, stringHandlers /* : StringHandlers */
+	, useImportant /* : boolean */
+	) /* : string[] */{
+	    var merged = new OrderedElements();
+
 	    for (var i = 0; i < styleTypes.length; i++) {
 	        merged.addStyleType(styleTypes[i]);
 	    }
-	
-	    var plainDeclarations = new _orderedElements2['default']();
-	    var generatedStyles = "";
-	
+
+	    var plainDeclarations = new OrderedElements();
+	    var generatedStyles = [];
+
 	    // TODO(emily): benchmark this to see if a plain for loop would be faster.
 	    merged.forEach(function (val, key) {
 	        // For each key, see if one of the selector handlers will handle these
@@ -273,35 +1254,45 @@ return /******/ (function(modules) { // webpackBootstrap
 	            if (result != null) {
 	                // If the handler returned something, add it to the generated
 	                // CSS and stop looking for another handler.
-	                generatedStyles += result;
+	                if (Array.isArray(result)) {
+	                    generatedStyles.push.apply(generatedStyles, _toConsumableArray(result));
+	                } else {
+	                    // eslint-disable-next-line
+	                    console.warn('WARNING: Selector handlers should return an array of rules.' + 'Returning a string containing multiple rules is deprecated.', handler);
+	                    generatedStyles.push('@media all {' + String(result) + '}');
+	                }
 	                return true;
 	            }
 	        });
 	        // If none of the handlers handled it, add it to the list of plain
 	        // style declarations.
 	        if (!foundHandler) {
-	            plainDeclarations.set(key, val);
+	            plainDeclarations.set(key, val, true);
 	        }
 	    });
-	
-	    return generateCSSRuleset(selector, plainDeclarations, stringHandlers, useImportant, selectorHandlers) + generatedStyles;
+	    var generatedRuleset = generateCSSRuleset(selector, plainDeclarations, stringHandlers, useImportant, selectorHandlers);
+
+	    if (generatedRuleset) {
+	        generatedStyles.unshift(generatedRuleset);
+	    }
+
+	    return generatedStyles;
 	};
-	
-	exports.generateCSS = generateCSS;
+
 	/**
 	 * Helper method of generateCSSRuleset to facilitate custom handling of certain
 	 * CSS properties. Used for e.g. font families.
 	 *
 	 * See generateCSSRuleset for usage and documentation of paramater types.
 	 */
-	var runStringHandlers = function runStringHandlers(declarations, /* : OrderedElements */
-	stringHandlers, /* : StringHandlers */
-	selectorHandlers /* : SelectorHandler[] */
-	) /* : OrderedElements */{
+	var runStringHandlers = function runStringHandlers(declarations /* : OrderedElements */
+	, stringHandlers /* : StringHandlers */
+	, selectorHandlers /* : SelectorHandler[] */
+	) /* : void */{
 	    if (!stringHandlers) {
-	        return declarations;
+	        return;
 	    }
-	
+
 	    var stringHandlerKeys = Object.keys(stringHandlers);
 	    for (var i = 0; i < stringHandlerKeys.length; i++) {
 	        var key = stringHandlerKeys[i];
@@ -315,21 +1306,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	            // `selectorHandlers` and have them make calls to `generateCSS`
 	            // themselves. Right now, this is impractical because our string
 	            // handlers are very specialized and do complex things.
-	            declarations.set(key, stringHandlers[key](declarations.get(key), selectorHandlers));
+	            declarations.set(key, stringHandlers[key](declarations.get(key), selectorHandlers),
+
+	            // Preserve order here, since we are really replacing an
+	            // unprocessed style with a processed style, not overriding an
+	            // earlier style
+	            false);
 	        }
 	    }
-	
-	    return declarations;
 	};
-	
-	var transformRule = function transformRule(key, /* : string */
-	value, /* : string */
-	transformValue /* : function */
+
+	var transformRule = function transformRule(key /* : string */
+	, value /* : string */
+	, transformValue /* : function */
 	) {
-	    return (/* : string */(0, _util.kebabifyStyleName)(key) + ':' + transformValue(key, value) + ';'
+	    return (/* : string */String(kebabifyStyleName(key)) + ':' + String(transformValue(key, value)) + ';'
 	    );
 	};
-	
+
+	var arrayToObjectKeysReducer = function arrayToObjectKeysReducer(acc, val) {
+	    acc[val] = true;
+	    return acc;
+	};
+
 	/**
 	 * Generate a CSS ruleset with the selector and containing the declarations.
 	 *
@@ -361,20 +1360,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *    generateCSSRuleset(".blah:hover", { color: "red" })
 	 *    -> ".blah:hover{color: red}"
 	 */
-	var generateCSSRuleset = function generateCSSRuleset(selector, /* : string */
-	declarations, /* : OrderedElements */
-	stringHandlers, /* : StringHandlers */
-	useImportant, /* : boolean */
-	selectorHandlers /* : SelectorHandler[] */
+	var generateCSSRuleset = function generateCSSRuleset(selector /* : string */
+	, declarations /* : OrderedElements */
+	, stringHandlers /* : StringHandlers */
+	, useImportant /* : boolean */
+	, selectorHandlers /* : SelectorHandler[] */
 	) /* : string */{
 	    // Mutates declarations
 	    runStringHandlers(declarations, stringHandlers, selectorHandlers);
-	
-	    var originalElements = _extends({}, declarations.elements);
-	
+
+	    var originalElements = Object.keys(declarations.elements).reduce(arrayToObjectKeysReducer, Object.create(null));
+
 	    // NOTE(emily): This mutates handledDeclarations.elements.
 	    var prefixedElements = prefixAll(declarations.elements);
-	
+
 	    var elementNames = Object.keys(prefixedElements);
 	    if (elementNames.length !== declarations.keyOrder.length) {
 	        // There are some prefixed values, so we need to figure out how to sort
@@ -384,11 +1383,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // sortOrder, which means it was added by prefixAll. This means that we
 	        // need to figure out where it should appear in the sortOrder.
 	        for (var i = 0; i < elementNames.length; i++) {
-	            if (!originalElements.hasOwnProperty(elementNames[i])) {
+	            if (!originalElements[elementNames[i]]) {
 	                // This element is not in the sortOrder, which means it is a prefixed
 	                // value that was added by prefixAll. Let's try to figure out where it
 	                // goes.
-	                var originalStyle = undefined;
+	                var originalStyle = void 0;
 	                if (elementNames[i][0] === 'W') {
 	                    // This is a Webkit-prefixed style, like "WebkitTransition". Let's
 	                    // find its original style's sort order.
@@ -403,8 +1402,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    // This is a Ms-prefixed style, like "MsTransition".
 	                    originalStyle = elementNames[i][2].toLowerCase() + elementNames[i].slice(3);
 	                }
-	
-	                if (originalStyle && originalElements.hasOwnProperty(originalStyle)) {
+
+	                if (originalStyle && originalElements[originalStyle]) {
 	                    var originalIndex = declarations.keyOrder.indexOf(originalStyle);
 	                    declarations.keyOrder.splice(originalIndex, 0, elementNames[i]);
 	                } else {
@@ -416,12 +1415,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    }
-	
-	    var transformValue = useImportant === false ? _util.stringifyValue : _util.stringifyAndImportantifyValue;
-	
+
+	    var transformValue = useImportant === false ? stringifyValue : stringifyAndImportantifyValue;
+
 	    var rules = [];
-	    for (var i = 0; i < declarations.keyOrder.length; i++) {
-	        var key = declarations.keyOrder[i];
+	    for (var _i = 0; _i < declarations.keyOrder.length; _i++) {
+	        var key = declarations.keyOrder[_i];
 	        var value = prefixedElements[key];
 	        if (Array.isArray(value)) {
 	            // inline-style-prefixer returns an array when there should be
@@ -434,1787 +1433,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	            rules.push(transformRule(key, value, transformValue));
 	        }
 	    }
-	
+
 	    if (rules.length) {
-	        return selector + '{' + rules.join("") + '}';
+	        return String(selector) + '{' + String(rules.join("")) + '}';
 	    } else {
 	        return "";
 	    }
 	};
-	exports.generateCSSRuleset = generateCSSRuleset;
 
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = createPrefixer;
-	
-	var _prefixProperty = __webpack_require__(4);
-	
-	var _prefixProperty2 = _interopRequireDefault(_prefixProperty);
-	
-	var _prefixValue = __webpack_require__(6);
-	
-	var _prefixValue2 = _interopRequireDefault(_prefixValue);
-	
-	var _addNewValuesOnly = __webpack_require__(7);
-	
-	var _addNewValuesOnly2 = _interopRequireDefault(_addNewValuesOnly);
-	
-	var _isObject = __webpack_require__(8);
-	
-	var _isObject2 = _interopRequireDefault(_isObject);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function createPrefixer(_ref) {
-	  var prefixMap = _ref.prefixMap,
-	      plugins = _ref.plugins;
-	
-	  function prefixAll(style) {
-	    for (var property in style) {
-	      var value = style[property];
-	
-	      // handle nested objects
-	      if ((0, _isObject2.default)(value)) {
-	        style[property] = prefixAll(value);
-	        // handle array values
-	      } else if (Array.isArray(value)) {
-	        var combinedValue = [];
-	
-	        for (var i = 0, len = value.length; i < len; ++i) {
-	          var processedValue = (0, _prefixValue2.default)(plugins, property, value[i], style, prefixMap);
-	          (0, _addNewValuesOnly2.default)(combinedValue, processedValue || value[i]);
-	        }
-	
-	        // only modify the value if it was touched
-	        // by any plugin to prevent unnecessary mutations
-	        if (combinedValue.length > 0) {
-	          style[property] = combinedValue;
-	        }
-	      } else {
-	        var _processedValue = (0, _prefixValue2.default)(plugins, property, value, style, prefixMap);
-	
-	        // only modify the value if it was touched
-	        // by any plugin to prevent unnecessary mutations
-	        if (_processedValue) {
-	          style[property] = _processedValue;
-	        }
-	
-	        style = (0, _prefixProperty2.default)(prefixMap, property, style);
-	      }
-	    }
-	
-	    return style;
-	  }
-	
-	  return prefixAll;
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = prefixProperty;
-	
-	var _capitalizeString = __webpack_require__(5);
-	
-	var _capitalizeString2 = _interopRequireDefault(_capitalizeString);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function prefixProperty(prefixProperties, property, style) {
-	  if (!prefixProperties.hasOwnProperty(property)) {
-	    return style;
-	  }
-	
-	  // We need to preserve the order of the styles while inserting new prefixed
-	  // styles. Object order is not guaranteed, but this is better than nothing.
-	  // Note that this is brittle and is likely to break in older versions of
-	  // Node (e.g. Node 4).
-	  var newStyle = {};
-	  Object.keys(style).forEach(function (styleProperty) {
-	    if (styleProperty === property) {
-	      // We've found the style we need to prefix.
-	      var requiredPrefixes = prefixProperties[property];
-	      for (var i = 0, len = requiredPrefixes.length; i < len; ++i) {
-	        newStyle[requiredPrefixes[i] + (0, _capitalizeString2.default)(property)] = style[property];
-	      }
-	    }
-	
-	    newStyle[styleProperty] = style[styleProperty];
-	  });
-	
-	  return newStyle;
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = capitalizeString;
-	function capitalizeString(str) {
-	  return str.charAt(0).toUpperCase() + str.slice(1);
-	}
-	module.exports = exports["default"];
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = prefixValue;
-	function prefixValue(plugins, property, value, style, metaData) {
-	  for (var i = 0, len = plugins.length; i < len; ++i) {
-	    var processedValue = plugins[i](property, value, style, metaData);
-	
-	    // we can stop processing if a value is returned
-	    // as all plugin criteria are unique
-	    if (processedValue) {
-	      return processedValue;
-	    }
-	  }
-	}
-	module.exports = exports["default"];
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = addNewValuesOnly;
-	function addIfNew(list, value) {
-	  if (list.indexOf(value) === -1) {
-	    list.push(value);
-	  }
-	}
-	
-	function addNewValuesOnly(list, values) {
-	  if (Array.isArray(values)) {
-	    for (var i = 0, len = values.length; i < len; ++i) {
-	      addIfNew(list, values[i]);
-	    }
-	  } else {
-	    addIfNew(list, values);
-	  }
-	}
-	module.exports = exports["default"];
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = isObject;
-	function isObject(value) {
-	  return value instanceof Object && !Array.isArray(value);
-	}
-	module.exports = exports["default"];
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var calc = __webpack_require__(10)
-	var crossFade = __webpack_require__(12)
-	var cursor = __webpack_require__(13)
-	var filter = __webpack_require__(14)
-	var flex = __webpack_require__(15)
-	var flexboxIE = __webpack_require__(16)
-	var flexboxOld = __webpack_require__(17)
-	var gradient = __webpack_require__(18)
-	var imageSet = __webpack_require__(19)
-	var position = __webpack_require__(20)
-	var sizing = __webpack_require__(21)
-	var transition = __webpack_require__(22)
-	
-	module.exports =  {
-	  plugins: [calc,crossFade,cursor,filter,flex,flexboxIE,flexboxOld,gradient,imageSet,position,sizing,transition],
-	  prefixMap: {"transform":["Webkit","ms"],"transformOrigin":["Webkit","ms"],"transformOriginX":["Webkit","ms"],"transformOriginY":["Webkit","ms"],"backfaceVisibility":["Webkit"],"perspective":["Webkit"],"perspectiveOrigin":["Webkit"],"transformStyle":["Webkit"],"transformOriginZ":["Webkit"],"animation":["Webkit"],"animationDelay":["Webkit"],"animationDirection":["Webkit"],"animationFillMode":["Webkit"],"animationDuration":["Webkit"],"animationIterationCount":["Webkit"],"animationName":["Webkit"],"animationPlayState":["Webkit"],"animationTimingFunction":["Webkit"],"appearance":["Webkit","Moz"],"userSelect":["Webkit","Moz","ms"],"fontKerning":["Webkit"],"textEmphasisPosition":["Webkit"],"textEmphasis":["Webkit"],"textEmphasisStyle":["Webkit"],"textEmphasisColor":["Webkit"],"boxDecorationBreak":["Webkit"],"clipPath":["Webkit"],"maskImage":["Webkit"],"maskMode":["Webkit"],"maskRepeat":["Webkit"],"maskPosition":["Webkit"],"maskClip":["Webkit"],"maskOrigin":["Webkit"],"maskSize":["Webkit"],"maskComposite":["Webkit"],"mask":["Webkit"],"maskBorderSource":["Webkit"],"maskBorderMode":["Webkit"],"maskBorderSlice":["Webkit"],"maskBorderWidth":["Webkit"],"maskBorderOutset":["Webkit"],"maskBorderRepeat":["Webkit"],"maskBorder":["Webkit"],"maskType":["Webkit"],"textDecorationStyle":["Webkit","Moz"],"textDecorationSkip":["Webkit","Moz"],"textDecorationLine":["Webkit","Moz"],"textDecorationColor":["Webkit","Moz"],"filter":["Webkit"],"fontFeatureSettings":["Webkit","Moz"],"breakAfter":["Webkit","Moz","ms"],"breakBefore":["Webkit","Moz","ms"],"breakInside":["Webkit","Moz","ms"],"columnCount":["Webkit","Moz"],"columnFill":["Webkit","Moz"],"columnGap":["Webkit","Moz"],"columnRule":["Webkit","Moz"],"columnRuleColor":["Webkit","Moz"],"columnRuleStyle":["Webkit","Moz"],"columnRuleWidth":["Webkit","Moz"],"columns":["Webkit","Moz"],"columnSpan":["Webkit","Moz"],"columnWidth":["Webkit","Moz"],"flex":["Webkit","ms"],"flexBasis":["Webkit"],"flexDirection":["Webkit","ms"],"flexGrow":["Webkit"],"flexFlow":["Webkit","ms"],"flexShrink":["Webkit"],"flexWrap":["Webkit","ms"],"alignContent":["Webkit"],"alignItems":["Webkit"],"alignSelf":["Webkit"],"justifyContent":["Webkit"],"order":["Webkit"],"transitionDelay":["Webkit"],"transitionDuration":["Webkit"],"transitionProperty":["Webkit"],"transitionTimingFunction":["Webkit"],"backdropFilter":["Webkit"],"scrollSnapType":["Webkit","ms"],"scrollSnapPointsX":["Webkit","ms"],"scrollSnapPointsY":["Webkit","ms"],"scrollSnapDestination":["Webkit","ms"],"scrollSnapCoordinate":["Webkit","ms"],"shapeImageThreshold":["Webkit"],"shapeImageMargin":["Webkit"],"shapeImageOutside":["Webkit"],"hyphens":["Webkit","Moz","ms"],"flowInto":["Webkit","ms"],"flowFrom":["Webkit","ms"],"regionFragment":["Webkit","ms"],"boxSizing":["Moz"],"textAlignLast":["Moz"],"tabSize":["Moz"],"wrapFlow":["ms"],"wrapThrough":["ms"],"wrapMargin":["ms"],"touchAction":["ms"],"gridTemplateColumns":["ms"],"gridTemplateRows":["ms"],"gridTemplateAreas":["ms"],"gridTemplate":["ms"],"gridAutoColumns":["ms"],"gridAutoRows":["ms"],"gridAutoFlow":["ms"],"grid":["ms"],"gridRowStart":["ms"],"gridColumnStart":["ms"],"gridRowEnd":["ms"],"gridRow":["ms"],"gridColumn":["ms"],"gridColumnEnd":["ms"],"gridColumnGap":["ms"],"gridRowGap":["ms"],"gridArea":["ms"],"gridGap":["ms"],"textSizeAdjust":["Webkit","ms"],"borderImage":["Webkit"],"borderImageOutset":["Webkit"],"borderImageRepeat":["Webkit"],"borderImageSlice":["Webkit"],"borderImageSource":["Webkit"],"borderImageWidth":["Webkit"]}
-	}
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = calc;
-	
-	var _isPrefixedValue = __webpack_require__(11);
-	
-	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var prefixes = ['-webkit-', '-moz-', ''];
-	function calc(property, value) {
-	  if (typeof value === 'string' && !(0, _isPrefixedValue2.default)(value) && value.indexOf('calc(') > -1) {
-	    return prefixes.map(function (prefix) {
-	      return value.replace(/calc\(/g, prefix + 'calc(');
-	    });
-	  }
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = isPrefixedValue;
-	
-	var regex = /-webkit-|-moz-|-ms-/;
-	
-	function isPrefixedValue(value) {
-	  return typeof value === 'string' && regex.test(value);
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = crossFade;
-	
-	var _isPrefixedValue = __webpack_require__(11);
-	
-	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	// http://caniuse.com/#search=cross-fade
-	var prefixes = ['-webkit-', ''];
-	function crossFade(property, value) {
-	  if (typeof value === 'string' && !(0, _isPrefixedValue2.default)(value) && value.indexOf('cross-fade(') > -1) {
-	    return prefixes.map(function (prefix) {
-	      return value.replace(/cross-fade\(/g, prefix + 'cross-fade(');
-	    });
-	  }
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = cursor;
-	var prefixes = ['-webkit-', '-moz-', ''];
-	
-	var values = {
-	  'zoom-in': true,
-	  'zoom-out': true,
-	  grab: true,
-	  grabbing: true
-	};
-	
-	function cursor(property, value) {
-	  if (property === 'cursor' && values.hasOwnProperty(value)) {
-	    return prefixes.map(function (prefix) {
-	      return prefix + value;
-	    });
-	  }
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = filter;
-	
-	var _isPrefixedValue = __webpack_require__(11);
-	
-	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	// http://caniuse.com/#feat=css-filter-function
-	var prefixes = ['-webkit-', ''];
-	function filter(property, value) {
-	  if (typeof value === 'string' && !(0, _isPrefixedValue2.default)(value) && value.indexOf('filter(') > -1) {
-	    return prefixes.map(function (prefix) {
-	      return value.replace(/filter\(/g, prefix + 'filter(');
-	    });
-	  }
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = flex;
-	var values = {
-	  flex: true,
-	  'inline-flex': true
-	};
-	
-	function flex(property, value) {
-	  if (property === 'display' && values.hasOwnProperty(value)) {
-	    return ['-webkit-box', '-moz-box', '-ms-' + value + 'box', '-webkit-' + value, value];
-	  }
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = flexboxIE;
-	var alternativeValues = {
-	  'space-around': 'distribute',
-	  'space-between': 'justify',
-	  'flex-start': 'start',
-	  'flex-end': 'end'
-	};
-	var alternativeProps = {
-	  alignContent: 'msFlexLinePack',
-	  alignSelf: 'msFlexItemAlign',
-	  alignItems: 'msFlexAlign',
-	  justifyContent: 'msFlexPack',
-	  order: 'msFlexOrder',
-	  flexGrow: 'msFlexPositive',
-	  flexShrink: 'msFlexNegative',
-	  flexBasis: 'msPreferredSize'
-	};
-	
-	function flexboxIE(property, value, style) {
-	  if (alternativeProps.hasOwnProperty(property)) {
-	    style[alternativeProps[property]] = alternativeValues[value] || value;
-	  }
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = flexboxOld;
-	var alternativeValues = {
-	  'space-around': 'justify',
-	  'space-between': 'justify',
-	  'flex-start': 'start',
-	  'flex-end': 'end',
-	  'wrap-reverse': 'multiple',
-	  wrap: 'multiple'
-	};
-	
-	var alternativeProps = {
-	  alignItems: 'WebkitBoxAlign',
-	  justifyContent: 'WebkitBoxPack',
-	  flexWrap: 'WebkitBoxLines'
-	};
-	
-	function flexboxOld(property, value, style) {
-	  if (property === 'flexDirection' && typeof value === 'string') {
-	    if (value.indexOf('column') > -1) {
-	      style.WebkitBoxOrient = 'vertical';
-	    } else {
-	      style.WebkitBoxOrient = 'horizontal';
-	    }
-	    if (value.indexOf('reverse') > -1) {
-	      style.WebkitBoxDirection = 'reverse';
-	    } else {
-	      style.WebkitBoxDirection = 'normal';
-	    }
-	  }
-	  if (alternativeProps.hasOwnProperty(property)) {
-	    style[alternativeProps[property]] = alternativeValues[value] || value;
-	  }
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = gradient;
-	
-	var _isPrefixedValue = __webpack_require__(11);
-	
-	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var prefixes = ['-webkit-', '-moz-', ''];
-	
-	var values = /linear-gradient|radial-gradient|repeating-linear-gradient|repeating-radial-gradient/;
-	
-	function gradient(property, value) {
-	  if (typeof value === 'string' && !(0, _isPrefixedValue2.default)(value) && values.test(value)) {
-	    return prefixes.map(function (prefix) {
-	      return prefix + value;
-	    });
-	  }
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = imageSet;
-	
-	var _isPrefixedValue = __webpack_require__(11);
-	
-	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	// http://caniuse.com/#feat=css-image-set
-	var prefixes = ['-webkit-', ''];
-	function imageSet(property, value) {
-	  if (typeof value === 'string' && !(0, _isPrefixedValue2.default)(value) && value.indexOf('image-set(') > -1) {
-	    return prefixes.map(function (prefix) {
-	      return value.replace(/image-set\(/g, prefix + 'image-set(');
-	    });
-	  }
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = position;
-	function position(property, value) {
-	  if (property === 'position' && value === 'sticky') {
-	    return ['-webkit-sticky', 'sticky'];
-	  }
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = sizing;
-	var prefixes = ['-webkit-', '-moz-', ''];
-	
-	var properties = {
-	  maxHeight: true,
-	  maxWidth: true,
-	  width: true,
-	  height: true,
-	  columnWidth: true,
-	  minWidth: true,
-	  minHeight: true
-	};
-	var values = {
-	  'min-content': true,
-	  'max-content': true,
-	  'fill-available': true,
-	  'fit-content': true,
-	  'contain-floats': true
-	};
-	
-	function sizing(property, value) {
-	  if (properties.hasOwnProperty(property) && values.hasOwnProperty(value)) {
-	    return prefixes.map(function (prefix) {
-	      return prefix + value;
-	    });
-	  }
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = transition;
-	
-	var _hyphenateProperty = __webpack_require__(23);
-	
-	var _hyphenateProperty2 = _interopRequireDefault(_hyphenateProperty);
-	
-	var _isPrefixedValue = __webpack_require__(11);
-	
-	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
-	
-	var _capitalizeString = __webpack_require__(5);
-	
-	var _capitalizeString2 = _interopRequireDefault(_capitalizeString);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var properties = {
-	  transition: true,
-	  transitionProperty: true,
-	  WebkitTransition: true,
-	  WebkitTransitionProperty: true,
-	  MozTransition: true,
-	  MozTransitionProperty: true
-	};
-	
-	
-	var prefixMapping = {
-	  Webkit: '-webkit-',
-	  Moz: '-moz-',
-	  ms: '-ms-'
-	};
-	
-	function prefixValue(value, propertyPrefixMap) {
-	  if ((0, _isPrefixedValue2.default)(value)) {
-	    return value;
-	  }
-	
-	  // only split multi values, not cubic beziers
-	  var multipleValues = value.split(/,(?![^()]*(?:\([^()]*\))?\))/g);
-	
-	  for (var i = 0, len = multipleValues.length; i < len; ++i) {
-	    var singleValue = multipleValues[i];
-	    var values = [singleValue];
-	    for (var property in propertyPrefixMap) {
-	      var dashCaseProperty = (0, _hyphenateProperty2.default)(property);
-	
-	      if (singleValue.indexOf(dashCaseProperty) > -1 && dashCaseProperty !== 'order') {
-	        var prefixes = propertyPrefixMap[property];
-	        for (var j = 0, pLen = prefixes.length; j < pLen; ++j) {
-	          // join all prefixes and create a new value
-	          values.unshift(singleValue.replace(dashCaseProperty, prefixMapping[prefixes[j]] + dashCaseProperty));
-	        }
-	      }
-	    }
-	
-	    multipleValues[i] = values.join(',');
-	  }
-	
-	  return multipleValues.join(',');
-	}
-	
-	function transition(property, value, style, propertyPrefixMap) {
-	  // also check for already prefixed transitions
-	  if (typeof value === 'string' && properties.hasOwnProperty(property)) {
-	    var outputValue = prefixValue(value, propertyPrefixMap);
-	    // if the property is already prefixed
-	    var webkitOutput = outputValue.split(/,(?![^()]*(?:\([^()]*\))?\))/g).filter(function (val) {
-	      return !/-moz-|-ms-/.test(val);
-	    }).join(',');
-	
-	    if (property.indexOf('Webkit') > -1) {
-	      return webkitOutput;
-	    }
-	
-	    var mozOutput = outputValue.split(/,(?![^()]*(?:\([^()]*\))?\))/g).filter(function (val) {
-	      return !/-webkit-|-ms-/.test(val);
-	    }).join(',');
-	
-	    if (property.indexOf('Moz') > -1) {
-	      return mozOutput;
-	    }
-	
-	    style['Webkit' + (0, _capitalizeString2.default)(property)] = webkitOutput;
-	    style['Moz' + (0, _capitalizeString2.default)(property)] = mozOutput;
-	    return outputValue;
-	  }
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = hyphenateProperty;
-	
-	var _hyphenateStyleName = __webpack_require__(24);
-	
-	var _hyphenateStyleName2 = _interopRequireDefault(_hyphenateStyleName);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function hyphenateProperty(property) {
-	  return (0, _hyphenateStyleName2.default)(property);
-	}
-	module.exports = exports['default'];
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	var uppercasePattern = /[A-Z]/g;
-	var msPattern = /^ms-/;
-	var cache = {};
-	
-	function hyphenateStyleName(string) {
-	    return string in cache
-	    ? cache[string]
-	    : cache[string] = string
-	      .replace(uppercasePattern, '-$&')
-	      .toLowerCase()
-	      .replace(msPattern, '-ms-');
-	}
-	
-	module.exports = hyphenateStyleName;
-
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	var MAP_EXISTS = typeof Map !== 'undefined';
-	
-	var OrderedElements = (function () {
-	    /* ::
-	    elements: {[string]: any};
-	    keyOrder: string[];
-	    */
-	
-	    function OrderedElements() {
-	        _classCallCheck(this, OrderedElements);
-	
-	        this.elements = {};
-	        this.keyOrder = [];
-	    }
-	
-	    _createClass(OrderedElements, [{
-	        key: 'forEach',
-	        value: function forEach(callback /* : (string, any) => void */) {
-	            for (var i = 0; i < this.keyOrder.length; i++) {
-	                // (value, key) to match Map's API
-	                callback(this.elements[this.keyOrder[i]], this.keyOrder[i]);
-	            }
-	        }
-	    }, {
-	        key: 'set',
-	        value: function set(key, /* : string */value /* : any */) {
-	            var _this = this;
-	
-	            if (!this.elements.hasOwnProperty(key)) {
-	                this.keyOrder.push(key);
-	            }
-	
-	            if (value == null) {
-	                this.elements[key] = value;
-	                return;
-	            }
-	
-	            if (MAP_EXISTS && value instanceof Map || value instanceof OrderedElements) {
-	                var _ret = (function () {
-	                    // We have found a nested Map, so we need to recurse so that all
-	                    // of the nested objects and Maps are merged properly.
-	                    var nested = _this.elements.hasOwnProperty(key) ? _this.elements[key] : new OrderedElements();
-	                    value.forEach(function (value, key) {
-	                        nested.set(key, value);
-	                    });
-	                    _this.elements[key] = nested;
-	                    return {
-	                        v: undefined
-	                    };
-	                })();
-	
-	                if (typeof _ret === 'object') return _ret.v;
-	            }
-	
-	            if (!Array.isArray(value) && typeof value === 'object') {
-	                // We have found a nested object, so we need to recurse so that all
-	                // of the nested objects and Maps are merged properly.
-	                var nested = this.elements.hasOwnProperty(key) ? this.elements[key] : new OrderedElements();
-	                var keys = Object.keys(value);
-	                for (var i = 0; i < keys.length; i += 1) {
-	                    nested.set(keys[i], value[keys[i]]);
-	                }
-	                this.elements[key] = nested;
-	                return;
-	            }
-	
-	            this.elements[key] = value;
-	        }
-	    }, {
-	        key: 'get',
-	        value: function get(key /* : string */) /* : any */{
-	            return this.elements[key];
-	        }
-	    }, {
-	        key: 'has',
-	        value: function has(key /* : string */) /* : boolean */{
-	            return this.elements.hasOwnProperty(key);
-	        }
-	    }, {
-	        key: 'addStyleType',
-	        value: function addStyleType(styleType /* : any */) /* : void */{
-	            var _this2 = this;
-	
-	            if (MAP_EXISTS && styleType instanceof Map || styleType instanceof OrderedElements) {
-	                styleType.forEach(function (value, key) {
-	                    _this2.set(key, value);
-	                });
-	            } else {
-	                var keys = Object.keys(styleType);
-	                for (var i = 0; i < keys.length; i++) {
-	                    this.set(keys[i], styleType[keys[i]]);
-	                }
-	            }
-	        }
-	    }]);
-	
-	    return OrderedElements;
-	})();
-	
-	exports['default'] = OrderedElements;
-	module.exports = exports['default'];
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	
-	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _stringHash = __webpack_require__(27);
-	
-	var _stringHash2 = _interopRequireDefault(_stringHash);
-	
-	/* ::
-	type Pair = [ string, any ];
-	type Pairs = Pair[];
-	type PairsMapper = (pair: Pair) => Pair;
-	type ObjectMap = { [id:string]: any };
-	*/
-	
-	var mapObj = function mapObj(obj, /* : ObjectMap */
-	fn /* : PairsMapper */
-	) /* : ObjectMap */{
-	    var keys = Object.keys(obj);
-	    var mappedObj = {};
-	    for (var i = 0; i < keys.length; i += 1) {
-	        var _fn = fn([keys[i], obj[keys[i]]]);
-	
-	        var _fn2 = _slicedToArray(_fn, 2);
-	
-	        var newKey = _fn2[0];
-	        var newValue = _fn2[1];
-	
-	        mappedObj[newKey] = newValue;
-	    }
-	    return mappedObj;
-	};
-	
-	exports.mapObj = mapObj;
-	var UPPERCASE_RE = /([A-Z])/g;
-	var UPPERCASE_RE_TO_KEBAB = function UPPERCASE_RE_TO_KEBAB(match /* : string */) {
-	    return (/* : string */'-' + match.toLowerCase()
-	    );
-	};
-	
-	var kebabifyStyleName = function kebabifyStyleName(string /* : string */) /* : string */{
-	    var result = string.replace(UPPERCASE_RE, UPPERCASE_RE_TO_KEBAB);
-	    if (result[0] === 'm' && result[1] === 's' && result[2] === '-') {
-	        return '-' + result;
-	    }
-	    return result;
-	};
-	
-	exports.kebabifyStyleName = kebabifyStyleName;
-	/**
-	 * CSS properties which accept numbers but are not in units of "px".
-	 * Taken from React's CSSProperty.js
-	 */
-	var isUnitlessNumber = {
-	    animationIterationCount: true,
-	    borderImageOutset: true,
-	    borderImageSlice: true,
-	    borderImageWidth: true,
-	    boxFlex: true,
-	    boxFlexGroup: true,
-	    boxOrdinalGroup: true,
-	    columnCount: true,
-	    flex: true,
-	    flexGrow: true,
-	    flexPositive: true,
-	    flexShrink: true,
-	    flexNegative: true,
-	    flexOrder: true,
-	    gridRow: true,
-	    gridColumn: true,
-	    fontWeight: true,
-	    lineClamp: true,
-	    lineHeight: true,
-	    opacity: true,
-	    order: true,
-	    orphans: true,
-	    tabSize: true,
-	    widows: true,
-	    zIndex: true,
-	    zoom: true,
-	
-	    // SVG-related properties
-	    fillOpacity: true,
-	    floodOpacity: true,
-	    stopOpacity: true,
-	    strokeDasharray: true,
-	    strokeDashoffset: true,
-	    strokeMiterlimit: true,
-	    strokeOpacity: true,
-	    strokeWidth: true
-	};
-	
-	/**
-	 * Taken from React's CSSProperty.js
-	 *
-	 * @param {string} prefix vendor-specific prefix, eg: Webkit
-	 * @param {string} key style name, eg: transitionDuration
-	 * @return {string} style name prefixed with `prefix`, properly camelCased, eg:
-	 * WebkitTransitionDuration
-	 */
-	function prefixKey(prefix, key) {
-	    return prefix + key.charAt(0).toUpperCase() + key.substring(1);
-	}
-	
-	/**
-	 * Support style names that may come passed in prefixed by adding permutations
-	 * of vendor prefixes.
-	 * Taken from React's CSSProperty.js
-	 */
-	var prefixes = ['Webkit', 'ms', 'Moz', 'O'];
-	
-	// Using Object.keys here, or else the vanilla for-in loop makes IE8 go into an
-	// infinite loop, because it iterates over the newly added props too.
-	// Taken from React's CSSProperty.js
-	Object.keys(isUnitlessNumber).forEach(function (prop) {
-	    prefixes.forEach(function (prefix) {
-	        isUnitlessNumber[prefixKey(prefix, prop)] = isUnitlessNumber[prop];
-	    });
-	});
-	
-	var stringifyValue = function stringifyValue(key, /* : string */
-	prop /* : any */
-	) /* : string */{
-	    if (typeof prop === "number") {
-	        if (isUnitlessNumber[key]) {
-	            return "" + prop;
-	        } else {
-	            return prop + "px";
-	        }
-	    } else {
-	        return '' + prop;
-	    }
-	};
-	
-	exports.stringifyValue = stringifyValue;
-	var stringifyAndImportantifyValue = function stringifyAndImportantifyValue(key, /* : string */
-	prop /* : any */
-	) {
-	    return (/* : string */importantify(stringifyValue(key, prop))
-	    );
-	};
-	
-	exports.stringifyAndImportantifyValue = stringifyAndImportantifyValue;
-	// Turn a string into a hash string of base-36 values (using letters and numbers)
-	var hashString = function hashString(string /* : string */) {
-	    return (/* string */(0, _stringHash2['default'])(string).toString(36)
-	    );
-	};
-	
-	exports.hashString = hashString;
-	// Hash a javascript object using JSON.stringify. This is very fast, about 3
-	// microseconds on my computer for a sample object:
-	// http://jsperf.com/test-hashfnv32a-hash/5
-	//
-	// Note that this uses JSON.stringify to stringify the objects so in order for
-	// this to produce consistent hashes browsers need to have a consistent
-	// ordering of objects. Ben Alpert says that Facebook depends on this, so we
-	// can probably depend on this too.
-	var hashObject = function hashObject(object /* : ObjectMap */) {
-	    return (/* : string */hashString(JSON.stringify(object))
-	    );
-	};
-	
-	exports.hashObject = hashObject;
-	// Given a single style value string like the "b" from "a: b;", adds !important
-	// to generate "b !important".
-	var importantify = function importantify(string /* : string */) {
-	    return (/* : string */
-	        // Bracket string character access is very fast, and in the default case we
-	        // normally don't expect there to be "!important" at the end of the string
-	        // so we can use this simple check to take an optimized path. If there
-	        // happens to be a "!" in this position, we follow up with a more thorough
-	        // check.
-	        string[string.length - 10] === '!' && string.slice(-11) === ' !important' ? string : string + ' !important'
-	    );
-	};
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports) {
-
-	"use strict";
-	
-	function hash(str) {
-	  var hash = 5381,
-	      i    = str.length;
-	
-	  while(i) {
-	    hash = (hash * 33) ^ str.charCodeAt(--i);
-	  }
-	
-	  /* JavaScript does bitwise operations (like XOR, above) on 32-bit signed
-	   * integers. Since we want the results to be always positive, convert the
-	   * signed int to an unsigned by doing an unsigned bitshift. */
-	  return hash >>> 0;
-	}
-	
-	module.exports = hash;
-
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
-	
-	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _util = __webpack_require__(26);
-	
-	var _inject = __webpack_require__(30);
-	
-	/* ::
-	import type { SelectorHandler } from './generate.js';
-	export type SheetDefinition = { [id:string]: any };
-	export type SheetDefinitions = SheetDefinition | SheetDefinition[];
-	type RenderFunction = () => string;
-	type Extension = {
-	    selectorHandler: SelectorHandler
-	};
-	export type MaybeSheetDefinition = SheetDefinition | false | null | void
-	*/
-	
-	var StyleSheet = {
-	    create: function create(sheetDefinition /* : SheetDefinition */) {
-	        return (0, _util.mapObj)(sheetDefinition, function (_ref) {
-	            var _ref2 = _slicedToArray(_ref, 2);
-	
-	            var key = _ref2[0];
-	            var val = _ref2[1];
-	
-	            var stringVal = JSON.stringify(val);
-	            return [key, {
-	                _len: stringVal.length,
-	                _name: process.env.NODE_ENV === 'production' ? (0, _util.hashString)(stringVal) : key + '_' + (0, _util.hashString)(stringVal),
-	                _definition: val
-	            }];
-	        });
-	    },
-	
-	    rehydrate: function rehydrate() {
-	        var renderedClassNames /* : string[] */ = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
-	
-	        (0, _inject.addRenderedClassNames)(renderedClassNames);
-	    }
-	};
-	
-	/**
-	 * Utilities for using Aphrodite server-side.
-	 */
-	var StyleSheetServer = {
-	    renderStatic: function renderStatic(renderFunc /* : RenderFunction */) {
-	        (0, _inject.reset)();
-	        (0, _inject.startBuffering)();
-	        var html = renderFunc();
-	        var cssContent = (0, _inject.flushToString)();
-	
-	        return {
-	            html: html,
-	            css: {
-	                content: cssContent,
-	                renderedClassNames: (0, _inject.getRenderedClassNames)()
-	            }
-	        };
-	    }
-	};
-	
-	/**
-	 * Utilities for using Aphrodite in tests.
-	 *
-	 * Not meant to be used in production.
-	 */
-	var StyleSheetTestUtils = {
-	    /**
-	     * Prevent styles from being injected into the DOM.
-	     *
-	     * This is useful in situations where you'd like to test rendering UI
-	     * components which use Aphrodite without any of the side-effects of
-	     * Aphrodite happening. Particularly useful for testing the output of
-	     * components when you have no DOM, e.g. testing in Node without a fake DOM.
-	     *
-	     * Should be paired with a subsequent call to
-	     * clearBufferAndResumeStyleInjection.
-	     */
-	    suppressStyleInjection: function suppressStyleInjection() {
-	        (0, _inject.reset)();
-	        (0, _inject.startBuffering)();
-	    },
-	
-	    /**
-	     * Opposite method of preventStyleInject.
-	     */
-	    clearBufferAndResumeStyleInjection: function clearBufferAndResumeStyleInjection() {
-	        (0, _inject.reset)();
-	    }
-	};
-	
-	/**
-	 * Generate the Aphrodite API exports, with given `selectorHandlers` and
-	 * `useImportant` state.
-	 */
-	var makeExports = function makeExports(useImportant, /* : boolean */
-	selectorHandlers /* : SelectorHandler[] */
-	) {
-	    return {
-	        StyleSheet: _extends({}, StyleSheet, {
-	
-	            /**
-	             * Returns a version of the exports of Aphrodite (i.e. an object
-	             * with `css` and `StyleSheet` properties) which have some
-	             * extensions included.
-	             *
-	             * @param {Array.<Object>} extensions: An array of extensions to
-	             *     add to this instance of Aphrodite. Each object should have a
-	             *     single property on it, defining which kind of extension to
-	             *     add.
-	             * @param {SelectorHandler} [extensions[].selectorHandler]: A
-	             *     selector handler extension. See `defaultSelectorHandlers` in
-	             *     generate.js.
-	             *
-	             * @returns {Object} An object containing the exports of the new
-	             *     instance of Aphrodite.
-	             */
-	            extend: function extend(extensions /* : Extension[] */) {
-	                var extensionSelectorHandlers = extensions
-	                // Pull out extensions with a selectorHandler property
-	                .map(function (extension) {
-	                    return extension.selectorHandler;
-	                })
-	                // Remove nulls (i.e. extensions without a selectorHandler
-	                // property).
-	                .filter(function (handler) {
-	                    return handler;
-	                });
-	
-	                return makeExports(useImportant, selectorHandlers.concat(extensionSelectorHandlers));
-	            }
-	        }),
-	
-	        StyleSheetServer: StyleSheetServer,
-	        StyleSheetTestUtils: StyleSheetTestUtils,
-	        reset: _inject.reset,
-	        css: function css() /* : MaybeSheetDefinition[] */{
-	            for (var _len = arguments.length, styleDefinitions = Array(_len), _key = 0; _key < _len; _key++) {
-	                styleDefinitions[_key] = arguments[_key];
-	            }
-	
-	            return (0, _inject.injectAndGetClassName)(useImportant, styleDefinitions, selectorHandlers);
-	        }
-	    };
-	};
-	
-	module.exports = makeExports;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports) {
-
-	// shim for using process in browser
-	var process = module.exports = {};
-	
-	// cached from whatever global is present so that test runners that stub it
-	// don't break things.  But we need to wrap it in a try catch in case it is
-	// wrapped in strict mode code which doesn't define any globals.  It's inside a
-	// function because try/catches deoptimize in certain engines.
-	
-	var cachedSetTimeout;
-	var cachedClearTimeout;
-	
-	function defaultSetTimout() {
-	    throw new Error('setTimeout has not been defined');
-	}
-	function defaultClearTimeout () {
-	    throw new Error('clearTimeout has not been defined');
-	}
-	(function () {
-	    try {
-	        if (typeof setTimeout === 'function') {
-	            cachedSetTimeout = setTimeout;
-	        } else {
-	            cachedSetTimeout = defaultSetTimout;
-	        }
-	    } catch (e) {
-	        cachedSetTimeout = defaultSetTimout;
-	    }
-	    try {
-	        if (typeof clearTimeout === 'function') {
-	            cachedClearTimeout = clearTimeout;
-	        } else {
-	            cachedClearTimeout = defaultClearTimeout;
-	        }
-	    } catch (e) {
-	        cachedClearTimeout = defaultClearTimeout;
-	    }
-	} ())
-	function runTimeout(fun) {
-	    if (cachedSetTimeout === setTimeout) {
-	        //normal enviroments in sane situations
-	        return setTimeout(fun, 0);
-	    }
-	    // if setTimeout wasn't available but was latter defined
-	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-	        cachedSetTimeout = setTimeout;
-	        return setTimeout(fun, 0);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedSetTimeout(fun, 0);
-	    } catch(e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-	            return cachedSetTimeout.call(null, fun, 0);
-	        } catch(e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-	            return cachedSetTimeout.call(this, fun, 0);
-	        }
-	    }
-	
-	
-	}
-	function runClearTimeout(marker) {
-	    if (cachedClearTimeout === clearTimeout) {
-	        //normal enviroments in sane situations
-	        return clearTimeout(marker);
-	    }
-	    // if clearTimeout wasn't available but was latter defined
-	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-	        cachedClearTimeout = clearTimeout;
-	        return clearTimeout(marker);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedClearTimeout(marker);
-	    } catch (e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-	            return cachedClearTimeout.call(null, marker);
-	        } catch (e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-	            return cachedClearTimeout.call(this, marker);
-	        }
-	    }
-	
-	
-	
-	}
-	var queue = [];
-	var draining = false;
-	var currentQueue;
-	var queueIndex = -1;
-	
-	function cleanUpNextTick() {
-	    if (!draining || !currentQueue) {
-	        return;
-	    }
-	    draining = false;
-	    if (currentQueue.length) {
-	        queue = currentQueue.concat(queue);
-	    } else {
-	        queueIndex = -1;
-	    }
-	    if (queue.length) {
-	        drainQueue();
-	    }
-	}
-	
-	function drainQueue() {
-	    if (draining) {
-	        return;
-	    }
-	    var timeout = runTimeout(cleanUpNextTick);
-	    draining = true;
-	
-	    var len = queue.length;
-	    while(len) {
-	        currentQueue = queue;
-	        queue = [];
-	        while (++queueIndex < len) {
-	            if (currentQueue) {
-	                currentQueue[queueIndex].run();
-	            }
-	        }
-	        queueIndex = -1;
-	        len = queue.length;
-	    }
-	    currentQueue = null;
-	    draining = false;
-	    runClearTimeout(timeout);
-	}
-	
-	process.nextTick = function (fun) {
-	    var args = new Array(arguments.length - 1);
-	    if (arguments.length > 1) {
-	        for (var i = 1; i < arguments.length; i++) {
-	            args[i - 1] = arguments[i];
-	        }
-	    }
-	    queue.push(new Item(fun, args));
-	    if (queue.length === 1 && !draining) {
-	        runTimeout(drainQueue);
-	    }
-	};
-	
-	// v8 likes predictible objects
-	function Item(fun, array) {
-	    this.fun = fun;
-	    this.array = array;
-	}
-	Item.prototype.run = function () {
-	    this.fun.apply(null, this.array);
-	};
-	process.title = 'browser';
-	process.browser = true;
-	process.env = {};
-	process.argv = [];
-	process.version = ''; // empty string to avoid regexp issues
-	process.versions = {};
-	
-	function noop() {}
-	
-	process.on = noop;
-	process.addListener = noop;
-	process.once = noop;
-	process.off = noop;
-	process.removeListener = noop;
-	process.removeAllListeners = noop;
-	process.emit = noop;
-	process.prependListener = noop;
-	process.prependOnceListener = noop;
-	
-	process.listeners = function (name) { return [] }
-	
-	process.binding = function (name) {
-	    throw new Error('process.binding is not supported');
-	};
-	
-	process.cwd = function () { return '/' };
-	process.chdir = function (dir) {
-	    throw new Error('process.chdir is not supported');
-	};
-	process.umask = function() { return 0; };
-
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _asap = __webpack_require__(31);
-	
-	var _asap2 = _interopRequireDefault(_asap);
-	
-	var _orderedElements = __webpack_require__(25);
-	
-	var _orderedElements2 = _interopRequireDefault(_orderedElements);
-	
-	var _generate = __webpack_require__(2);
-	
-	var _util = __webpack_require__(26);
-	
-	/* ::
-	import type { SheetDefinition, SheetDefinitions } from './index.js';
-	import type { MaybeSheetDefinition } from './exports.js';
-	import type { SelectorHandler } from './generate.js';
-	type ProcessedStyleDefinitions = {
-	  classNameBits: Array<string>,
-	  definitionBits: Array<Object>,
-	};
-	*/
-	
-	// The current <style> tag we are inserting into, or null if we haven't
-	// inserted anything yet. We could find this each time using
-	// `document.querySelector("style[data-aphrodite"])`, but holding onto it is
-	// faster.
-	var styleTag = null;
-	
-	// Inject a string of styles into a <style> tag in the head of the document. This
-	// will automatically create a style tag and then continue to use it for
-	// multiple injections. It will also use a style tag with the `data-aphrodite`
-	// tag on it if that exists in the DOM. This could be used for e.g. reusing the
-	// same style tag that server-side rendering inserts.
-	var injectStyleTag = function injectStyleTag(cssContents /* : string */) {
-	    if (styleTag == null) {
-	        // Try to find a style tag with the `data-aphrodite` attribute first.
-	        styleTag = document.querySelector("style[data-aphrodite-factoryfour]");
-	
-	        // If that doesn't work, generate a new style tag.
-	        if (styleTag == null) {
-	            // Taken from
-	            // http://stackoverflow.com/questions/524696/how-to-create-a-style-tag-with-javascript
-	            var docToUse = document;
-	            if (document.getElementById('factoryfour-primary-container') != null) {
-	                docToUse = document.getElementById('factoryfour-primary-container').contentDocument;
-	            }
-	
-	            var head = docToUse.head || docToUse.getElementsByTagName('head')[0];
-	            styleTag = docToUse.createElement('style');
-	
-	            styleTag.type = 'text/css';
-	            styleTag.setAttribute("data-aphrodite-factoryfour", "");
-	            head.appendChild(styleTag);
-	        }
-	    }
-	
-	    if (styleTag.styleSheet) {
-	        // $FlowFixMe: legacy Internet Explorer compatibility
-	        styleTag.styleSheet.cssText += cssContents;
-	    } else {
-	        styleTag.appendChild(document.createTextNode(cssContents));
-	    }
-	};
-	
-	// Custom handlers for stringifying CSS values that have side effects
-	// (such as fontFamily, which can cause @font-face rules to be injected)
-	var stringHandlers = {
-	    // With fontFamily we look for objects that are passed in and interpret
-	    // them as @font-face rules that we need to inject. The value of fontFamily
-	    // can either be a string (as normal), an object (a single font face), or
-	    // an array of objects and strings.
-	    fontFamily: function fontFamily(val) {
-	        if (Array.isArray(val)) {
-	            return val.map(fontFamily).join(",");
-	        } else if (typeof val === "object") {
-	            injectStyleOnce(val.src, "@font-face", [val], false);
-	            return '"' + val.fontFamily + '"';
-	        } else {
-	            return val;
-	        }
-	    },
-	
-	    // With animationName we look for an object that contains keyframes and
-	    // inject them as an `@keyframes` block, returning a uniquely generated
-	    // name. The keyframes object should look like
-	    //  animationName: {
-	    //    from: {
-	    //      left: 0,
-	    //      top: 0,
-	    //    },
-	    //    '50%': {
-	    //      left: 15,
-	    //      top: 5,
-	    //    },
-	    //    to: {
-	    //      left: 20,
-	    //      top: 20,
-	    //    }
-	    //  }
-	    // TODO(emily): `stringHandlers` doesn't let us rename the key, so I have
-	    // to use `animationName` here. Improve that so we can call this
-	    // `animation` instead of `animationName`.
-	    animationName: function animationName(val, selectorHandlers) {
-	        if (Array.isArray(val)) {
-	            return val.map(function (v) {
-	                return animationName(v, selectorHandlers);
-	            }).join(",");
-	        } else if (typeof val === "object") {
-	            // Generate a unique name based on the hash of the object. We can't
-	            // just use the hash because the name can't start with a number.
-	            // TODO(emily): this probably makes debugging hard, allow a custom
-	            // name?
-	            var _name = 'keyframe_' + (0, _util.hashObject)(val);
-	
-	            // Since keyframes need 3 layers of nesting, we use `generateCSS` to
-	            // build the inner layers and wrap it in `@keyframes` ourselves.
-	            var finalVal = '@keyframes ' + _name + '{';
-	
-	            // TODO see if we can find a way where checking for OrderedElements
-	            // here is not necessary. Alternatively, perhaps we should have a
-	            // utility method that can iterate over either a plain object, an
-	            // instance of OrderedElements, or a Map, and then use that here and
-	            // elsewhere.
-	            if (val instanceof _orderedElements2['default']) {
-	                val.forEach(function (valVal, valKey) {
-	                    finalVal += (0, _generate.generateCSS)(valKey, [valVal], selectorHandlers, stringHandlers, false);
-	                });
-	            } else {
-	                Object.keys(val).forEach(function (key) {
-	                    finalVal += (0, _generate.generateCSS)(key, [val[key]], selectorHandlers, stringHandlers, false);
-	                });
-	            }
-	            finalVal += '}';
-	
-	            injectGeneratedCSSOnce(_name, finalVal);
-	
-	            return _name;
-	        } else {
-	            return val;
-	        }
-	    }
-	};
-	
-	// This is a map from Aphrodite's generated class names to `true` (acting as a
-	// set of class names)
-	var alreadyInjected = {};
-	
-	// This is the buffer of styles which have not yet been flushed.
-	var injectionBuffer = "";
-	
-	// A flag to tell if we are already buffering styles. This could happen either
-	// because we scheduled a flush call already, so newly added styles will
-	// already be flushed, or because we are statically buffering on the server.
-	var isBuffering = false;
-	
-	var injectGeneratedCSSOnce = function injectGeneratedCSSOnce(key, generatedCSS) {
-	    if (alreadyInjected[key]) {
-	        return;
-	    }
-	
-	    if (!isBuffering) {
-	        // We should never be automatically buffering on the server (or any
-	        // place without a document), so guard against that.
-	        if (typeof document === "undefined") {
-	            throw new Error("Cannot automatically buffer without a document");
-	        }
-	
-	        // If we're not already buffering, schedule a call to flush the
-	        // current styles.
-	        isBuffering = true;
-	        (0, _asap2['default'])(flushToStyleTag);
-	    }
-	
-	    injectionBuffer += generatedCSS;
-	    alreadyInjected[key] = true;
-	};
-	
-	var injectStyleOnce = function injectStyleOnce(key, /* : string */
-	selector, /* : string */
-	definitions, /* : SheetDefinition[] */
-	useImportant /* : boolean */
-	) {
-	    var selectorHandlers /* : SelectorHandler[] */ = arguments.length <= 4 || arguments[4] === undefined ? [] : arguments[4];
-	
-	    if (alreadyInjected[key]) {
-	        return;
-	    }
-	
-	    var generated = (0, _generate.generateCSS)(selector, definitions, selectorHandlers, stringHandlers, useImportant);
-	
-	    injectGeneratedCSSOnce(key, generated);
-	};
-	
-	exports.injectStyleOnce = injectStyleOnce;
-	var reset = function reset() {
-	    injectionBuffer = "";
-	    alreadyInjected = {};
-	    isBuffering = false;
-	    styleTag = null;
-	};
-	
-	exports.reset = reset;
-	var startBuffering = function startBuffering() {
-	    if (isBuffering) {
-	        throw new Error("Cannot buffer while already buffering");
-	    }
-	    isBuffering = true;
-	};
-	
-	exports.startBuffering = startBuffering;
-	var flushToString = function flushToString() {
-	    isBuffering = false;
-	    var ret = injectionBuffer;
-	    injectionBuffer = "";
-	    return ret;
-	};
-	
-	exports.flushToString = flushToString;
-	var flushToStyleTag = function flushToStyleTag() {
-	    var cssContent = flushToString();
-	    if (cssContent.length > 0) {
-	        injectStyleTag(cssContent);
-	    }
-	};
-	
-	exports.flushToStyleTag = flushToStyleTag;
-	var getRenderedClassNames = function getRenderedClassNames() {
-	    return Object.keys(alreadyInjected);
-	};
-	
-	exports.getRenderedClassNames = getRenderedClassNames;
-	var addRenderedClassNames = function addRenderedClassNames(classNames /* : string[] */) {
-	    classNames.forEach(function (className) {
-	        alreadyInjected[className] = true;
-	    });
-	};
-	
-	exports.addRenderedClassNames = addRenderedClassNames;
-	var processStyleDefinitions = function processStyleDefinitions(styleDefinitions, /* : any[] */
-	result /* : ProcessedStyleDefinitions */
-	) /* : void */{
-	    for (var i = 0; i < styleDefinitions.length; i += 1) {
-	        // Filter out falsy values from the input, to allow for
-	        // `css(a, test && c)`
-	        if (styleDefinitions[i]) {
-	            if (Array.isArray(styleDefinitions[i])) {
-	                // We've encountered an array, so let's recurse
-	                processStyleDefinitions(styleDefinitions[i], result);
-	            } else {
-	                result.classNameBits.push(styleDefinitions[i]._name);
-	                result.definitionBits.push(styleDefinitions[i]._definition);
-	            }
-	        }
-	    }
-	};
-	
-	// Sum up the lengths of the stringified style definitions (which was saved as _len property)
-	// and use modulus to return a single byte hash value.
-	// We append this extra byte to the 32bit hash to decrease the chance of hash collisions.
-	var getStyleDefinitionsLengthHash = function getStyleDefinitionsLengthHash(styleDefinitions /* : any[] */) {
-	    return (/* : string */(styleDefinitions.reduce(function (length, styleDefinition) {
-	            return length + (styleDefinition ? styleDefinition._len : 0);
-	        }, 0) % 36).toString(36)
-	    );
-	};
-	
-	/**
-	 * Inject styles associated with the passed style definition objects, and return
-	 * an associated CSS class name.
-	 *
-	 * @param {boolean} useImportant If true, will append !important to generated
-	 *     CSS output. e.g. {color: red} -> "color: red !important".
-	 * @param {(Object|Object[])[]} styleDefinitions style definition objects, or
-	 *     arbitrarily nested arrays of them, as returned as properties of the
-	 *     return value of StyleSheet.create().
-	 */
-	var injectAndGetClassName = function injectAndGetClassName(useImportant, /* : boolean */
-	styleDefinitions, /* : MaybeSheetDefinition[] */
-	selectorHandlers /* : SelectorHandler[] */
-	) /* : string */{
-	    var processedStyleDefinitions /* : ProcessedStyleDefinitions */ = {
-	        classNameBits: [],
-	        definitionBits: []
-	    };
-	    // Mutates processedStyleDefinitions
-	    processStyleDefinitions(styleDefinitions, processedStyleDefinitions);
-	
-	    // Break if there aren't any valid styles.
-	    if (processedStyleDefinitions.classNameBits.length === 0) {
-	        return "";
-	    }
-	
-	    var className = undefined;
-	    if (process.env.NODE_ENV === 'production') {
-	        className = processedStyleDefinitions.classNameBits.length === 1 ? '_' + processedStyleDefinitions.classNameBits[0] : '_' + (0, _util.hashString)(processedStyleDefinitions.classNameBits.join()) + getStyleDefinitionsLengthHash(styleDefinitions);
-	    } else {
-	        className = processedStyleDefinitions.classNameBits.join("-o_O-");
-	    }
-	
-	    injectStyleOnce(className, '.' + className, processedStyleDefinitions.definitionBits, useImportant, selectorHandlers);
-	
-	    return className;
-	};
-	exports.injectAndGetClassName = injectAndGetClassName;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	// rawAsap provides everything we need except exception management.
-	var rawAsap = __webpack_require__(32);
-	// RawTasks are recycled to reduce GC churn.
-	var freeTasks = [];
-	// We queue errors to ensure they are thrown in right order (FIFO).
-	// Array-as-queue is good enough here, since we are just dealing with exceptions.
-	var pendingErrors = [];
-	var requestErrorThrow = rawAsap.makeRequestCallFromTimer(throwFirstError);
-	
-	function throwFirstError() {
-	    if (pendingErrors.length) {
-	        throw pendingErrors.shift();
-	    }
-	}
-	
-	/**
-	 * Calls a task as soon as possible after returning, in its own event, with priority
-	 * over other events like animation, reflow, and repaint. An error thrown from an
-	 * event will not interrupt, nor even substantially slow down the processing of
-	 * other events, but will be rather postponed to a lower priority event.
-	 * @param {{call}} task A callable object, typically a function that takes no
-	 * arguments.
-	 */
-	module.exports = asap;
-	function asap(task) {
-	    var rawTask;
-	    if (freeTasks.length) {
-	        rawTask = freeTasks.pop();
-	    } else {
-	        rawTask = new RawTask();
-	    }
-	    rawTask.task = task;
-	    rawAsap(rawTask);
-	}
-	
-	// We wrap tasks with recyclable task objects.  A task object implements
-	// `call`, just like a function.
-	function RawTask() {
-	    this.task = null;
-	}
-	
-	// The sole purpose of wrapping the task is to catch the exception and recycle
-	// the task object after its single use.
-	RawTask.prototype.call = function () {
-	    try {
-	        this.task.call();
-	    } catch (error) {
-	        if (asap.onerror) {
-	            // This hook exists purely for testing purposes.
-	            // Its name will be periodically randomized to break any code that
-	            // depends on its existence.
-	            asap.onerror(error);
-	        } else {
-	            // In a web browser, exceptions are not fatal. However, to avoid
-	            // slowing down the queue of pending tasks, we rethrow the error in a
-	            // lower priority turn.
-	            pendingErrors.push(error);
-	            requestErrorThrow();
-	        }
-	    } finally {
-	        this.task = null;
-	        freeTasks[freeTasks.length] = this;
-	    }
-	};
-
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
-	
 	// Use the fastest means possible to execute a task in its own turn, with
 	// priority over other events including IO, animation, reflow, and redraw
 	// events in browsers.
@@ -2225,20 +1451,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	// soon as possible, but if you use `rawAsap` directly, you are responsible to
 	// either ensure that no exceptions are thrown from your task, or to manually
 	// call `rawAsap.requestFlush` if an exception is thrown.
-	module.exports = rawAsap;
+	var browserRaw = rawAsap;
 	function rawAsap(task) {
 	    if (!queue.length) {
 	        requestFlush();
-	        flushing = true;
 	    }
 	    // Equivalent to push, but avoids a function call.
 	    queue[queue.length] = task;
 	}
-	
+
 	var queue = [];
-	// Once a flush has been requested, no further calls to `requestFlush` are
-	// necessary until the next `flush` completes.
-	var flushing = false;
 	// `requestFlush` is an implementation-specific method that attempts to kick
 	// off a `flush` event as quickly as possible. `flush` will attempt to exhaust
 	// the event queue before yielding to the browser's own event loop.
@@ -2251,7 +1473,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// unbounded. To prevent memory exhaustion, the task queue will periodically
 	// truncate already-completed tasks.
 	var capacity = 1024;
-	
+
 	// The flush function processes all tasks that have been scheduled with
 	// `rawAsap` unless and until one of those tasks throws an exception.
 	// If a task throws an exception, `flush` ensures that its state will remain
@@ -2282,22 +1504,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    queue.length = 0;
 	    index = 0;
-	    flushing = false;
 	}
-	
+
 	// `requestFlush` is implemented using a strategy based on data collected from
 	// every available SauceLabs Selenium web driver worker at time of writing.
 	// https://docs.google.com/spreadsheets/d/1mG-5UYGup5qxGdEMWkhP6BWCz053NUb2E1QoUTU16uA/edit#gid=783724593
-	
+
 	// Safari 6 and 6.1 for desktop, iPad, and iPhone are the only browsers that
 	// have WebKitMutationObserver but not un-prefixed MutationObserver.
 	// Must use `global` or `self` instead of `window` to work in both frames and web
 	// workers. `global` is a provision of Browserify, Mr, Mrs, or Mop.
-	
+
 	/* globals self */
-	var scope = typeof global !== "undefined" ? global : self;
+	var scope = typeof commonjsGlobal !== "undefined" ? commonjsGlobal : self;
 	var BrowserMutationObserver = scope.MutationObserver || scope.WebKitMutationObserver;
-	
+
 	// MutationObservers are desirable because they have high priority and work
 	// reliably everywhere they are implemented.
 	// They are implemented in all modern browsers.
@@ -2311,14 +1532,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	// - Safari 6-7
 	if (typeof BrowserMutationObserver === "function") {
 	    requestFlush = makeRequestCallFromMutationObserver(flush);
-	
+
 	// MessageChannels are desirable because they give direct access to the HTML
 	// task queue, are implemented in Internet Explorer 10, Safari 5.0-1, and Opera
 	// 11-12, and in web workers in many engines.
 	// Although message channels yield to any queued rendering and IO tasks, they
 	// would be better than imposing the 4ms delay of timers.
 	// However, they do not work reliably in Internet Explorer or Safari.
-	
+
 	// Internet Explorer 10 is the only browser that has setImmediate but does
 	// not have MutationObservers.
 	// Although setImmediate yields to the browser's renderer, it would be
@@ -2328,7 +1549,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// Desktop to a lesser extent) that renders both setImmediate and
 	// MessageChannel useless for the purposes of ASAP.
 	// https://github.com/kriskowal/q/issues/396
-	
+
 	// Timers are implemented universally.
 	// We fall back to timers in workers in most engines, and in foreground
 	// contexts in the following browsers.
@@ -2342,14 +1563,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	} else {
 	    requestFlush = makeRequestCallFromTimer(flush);
 	}
-	
+
 	// `requestFlush` requests that the high priority event queue be flushed as
 	// soon as possible.
 	// This is useful to prevent an error thrown in a task from stalling the event
 	// queue if the exception handled by Node.js’s
 	// `process.on("uncaughtException")` or by a domain.
 	rawAsap.requestFlush = requestFlush;
-	
+
 	// To request a high priority event, we induce a mutation observer by toggling
 	// the text of a text node between "1" and "-1".
 	function makeRequestCallFromMutationObserver(callback) {
@@ -2362,15 +1583,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	        node.data = toggle;
 	    };
 	}
-	
+
 	// The message channel technique was discovered by Malte Ubl and was the
 	// original foundation for this library.
 	// http://www.nonblocking.io/2011/06/windownexttick.html
-	
+
 	// Safari 6.0.5 (at least) intermittently fails to create message ports on a
 	// page's first load. Thankfully, this version of Safari supports
 	// MutationObservers, so we don't need to fall back in that case.
-	
+
 	// function makeRequestCallFromMessageChannel(callback) {
 	//     var channel = new MessageChannel();
 	//     channel.port1.onmessage = callback;
@@ -2378,7 +1599,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//         channel.port2.postMessage(0);
 	//     };
 	// }
-	
+
 	// For reasons explained above, we are also unable to use `setImmediate`
 	// under any circumstances.
 	// Even if we were, there is another bug in Internet Explorer 10.
@@ -2386,23 +1607,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	// `setImmediate` must be called *by name* and therefore must be wrapped in a
 	// closure.
 	// Never forget.
-	
+
 	// function makeRequestCallFromSetImmediate(callback) {
 	//     return function requestCall() {
 	//         setImmediate(callback);
 	//     };
 	// }
-	
+
 	// Safari 6.0 has a problem where timers will get lost while the user is
 	// scrolling. This problem does not impact ASAP because Safari 6.0 supports
 	// mutation observers, so that implementation is used instead.
 	// However, if we ever elect to use timers in Safari, the prevalent work-around
 	// is to add a scroll event listener that calls for a flush.
-	
+
 	// `setTimeout` does not call the passed callback if the delay is less than
 	// approximately 7 in web workers in Firefox 8 through 18, and sometimes not
 	// even then.
-	
+
 	function makeRequestCallFromTimer(callback) {
 	    return function requestCall() {
 	        // We dispatch a timeout with a specified delay of 0 for engines that
@@ -2414,7 +1635,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // workers, we enlist an interval handle that will try to fire
 	        // an event 20 times per second until it succeeds.
 	        var intervalHandle = setInterval(handleTimer, 50);
-	
+
 	        function handleTimer() {
 	            // Whichever timer succeeds will cancel both timers and
 	            // execute the callback.
@@ -2424,638 +1645,552 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    };
 	}
-	
+
 	// This is for `asap.js` only.
 	// Its name will be periodically randomized to break any code that depends on
 	// its existence.
 	rawAsap.makeRequestCallFromTimer = makeRequestCallFromTimer;
-	
-	// ASAP was originally a nextTick shim included in Q. This was factored out
-	// into this ASAP package. It was later adapted to RSVP which made further
-	// amendments. These decisions, particularly to marginalize MessageChannel and
-	// to capture the MutationObserver implementation in a closure, were integrated
-	// back into ASAP proper.
-	// https://github.com/tildeio/rsvp.js/blob/cddf7232546a9cf858524b75cde6f9edf72620a7/lib/rsvp/asap.js
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
+	var browserRaw$1 = /*#__PURE__*/Object.freeze({
+		default: browserRaw,
+		__moduleExports: browserRaw
 	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _propTypes = __webpack_require__(34);
-	
-	var _propTypes2 = _interopRequireDefault(_propTypes);
-	
-	var AphroditeClass = _propTypes2['default'].shape({
-	    _len: _propTypes2['default'].number,
-	    _name: _propTypes2['default'].string,
-	    _definition: _propTypes2['default'].object
-	});
-	
-	var AphroditeClasses = _propTypes2['default'].oneOfType([AphroditeClass, _propTypes2['default'].arrayOf(AphroditeClass)]);
-	
-	exports.AphroditeClass = AphroditeClass;
-	exports.AphroditeClasses = AphroditeClasses;
 
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
+	var rawAsap$1 = ( browserRaw$1 && browserRaw ) || browserRaw$1;
 
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 *
-	 * This source code is licensed under the MIT license found in the
-	 * LICENSE file in the root directory of this source tree.
-	 */
-	
-	if (process.env.NODE_ENV !== 'production') {
-	  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
-	    Symbol.for &&
-	    Symbol.for('react.element')) ||
-	    0xeac7;
-	
-	  var isValidElement = function(object) {
-	    return typeof object === 'object' &&
-	      object !== null &&
-	      object.$$typeof === REACT_ELEMENT_TYPE;
-	  };
-	
-	  // By explicitly using `prop-types` you are opting into new development behavior.
-	  // http://fb.me/prop-types-in-prod
-	  var throwOnDirectAccess = true;
-	  module.exports = __webpack_require__(35)(isValidElement, throwOnDirectAccess);
-	} else {
-	  // By explicitly using `prop-types` you are opting into new production behavior.
-	  // http://fb.me/prop-types-in-prod
-	  module.exports = __webpack_require__(42)();
+	// rawAsap provides everything we need except exception management.
+
+	// RawTasks are recycled to reduce GC churn.
+	var freeTasks = [];
+	// We queue errors to ensure they are thrown in right order (FIFO).
+	// Array-as-queue is good enough here, since we are just dealing with exceptions.
+	var pendingErrors = [];
+	var requestErrorThrow = rawAsap$1.makeRequestCallFromTimer(throwFirstError);
+
+	function throwFirstError() {
+	    if (pendingErrors.length) {
+	        throw pendingErrors.shift();
+	    }
 	}
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
 
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 *
-	 * This source code is licensed under the MIT license found in the
-	 * LICENSE file in the root directory of this source tree.
+	/**
+	 * Calls a task as soon as possible after returning, in its own event, with priority
+	 * over other events like animation, reflow, and repaint. An error thrown from an
+	 * event will not interrupt, nor even substantially slow down the processing of
+	 * other events, but will be rather postponed to a lower priority event.
+	 * @param {{call}} task A callable object, typically a function that takes no
+	 * arguments.
 	 */
-	
-	'use strict';
-	
-	var emptyFunction = __webpack_require__(36);
-	var invariant = __webpack_require__(37);
-	var warning = __webpack_require__(38);
-	var assign = __webpack_require__(39);
-	
-	var ReactPropTypesSecret = __webpack_require__(40);
-	var checkPropTypes = __webpack_require__(41);
-	
-	module.exports = function(isValidElement, throwOnDirectAccess) {
-	  /* global Symbol */
-	  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
-	  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
-	
-	  /**
-	   * Returns the iterator method function contained on the iterable object.
-	   *
-	   * Be sure to invoke the function with the iterable as context:
-	   *
-	   *     var iteratorFn = getIteratorFn(myIterable);
-	   *     if (iteratorFn) {
-	   *       var iterator = iteratorFn.call(myIterable);
-	   *       ...
-	   *     }
-	   *
-	   * @param {?object} maybeIterable
-	   * @return {?function}
-	   */
-	  function getIteratorFn(maybeIterable) {
-	    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
-	    if (typeof iteratorFn === 'function') {
-	      return iteratorFn;
-	    }
-	  }
-	
-	  /**
-	   * Collection of methods that allow declaration and validation of props that are
-	   * supplied to React components. Example usage:
-	   *
-	   *   var Props = require('ReactPropTypes');
-	   *   var MyArticle = React.createClass({
-	   *     propTypes: {
-	   *       // An optional string prop named "description".
-	   *       description: Props.string,
-	   *
-	   *       // A required enum prop named "category".
-	   *       category: Props.oneOf(['News','Photos']).isRequired,
-	   *
-	   *       // A prop named "dialog" that requires an instance of Dialog.
-	   *       dialog: Props.instanceOf(Dialog).isRequired
-	   *     },
-	   *     render: function() { ... }
-	   *   });
-	   *
-	   * A more formal specification of how these methods are used:
-	   *
-	   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
-	   *   decl := ReactPropTypes.{type}(.isRequired)?
-	   *
-	   * Each and every declaration produces a function with the same signature. This
-	   * allows the creation of custom validation functions. For example:
-	   *
-	   *  var MyLink = React.createClass({
-	   *    propTypes: {
-	   *      // An optional string or URI prop named "href".
-	   *      href: function(props, propName, componentName) {
-	   *        var propValue = props[propName];
-	   *        if (propValue != null && typeof propValue !== 'string' &&
-	   *            !(propValue instanceof URI)) {
-	   *          return new Error(
-	   *            'Expected a string or an URI for ' + propName + ' in ' +
-	   *            componentName
-	   *          );
-	   *        }
-	   *      }
-	   *    },
-	   *    render: function() {...}
-	   *  });
-	   *
-	   * @internal
-	   */
-	
-	  var ANONYMOUS = '<<anonymous>>';
-	
-	  // Important!
-	  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
-	  var ReactPropTypes = {
-	    array: createPrimitiveTypeChecker('array'),
-	    bool: createPrimitiveTypeChecker('boolean'),
-	    func: createPrimitiveTypeChecker('function'),
-	    number: createPrimitiveTypeChecker('number'),
-	    object: createPrimitiveTypeChecker('object'),
-	    string: createPrimitiveTypeChecker('string'),
-	    symbol: createPrimitiveTypeChecker('symbol'),
-	
-	    any: createAnyTypeChecker(),
-	    arrayOf: createArrayOfTypeChecker,
-	    element: createElementTypeChecker(),
-	    instanceOf: createInstanceTypeChecker,
-	    node: createNodeChecker(),
-	    objectOf: createObjectOfTypeChecker,
-	    oneOf: createEnumTypeChecker,
-	    oneOfType: createUnionTypeChecker,
-	    shape: createShapeTypeChecker,
-	    exact: createStrictShapeTypeChecker,
-	  };
-	
-	  /**
-	   * inlined Object.is polyfill to avoid requiring consumers ship their own
-	   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
-	   */
-	  /*eslint-disable no-self-compare*/
-	  function is(x, y) {
-	    // SameValue algorithm
-	    if (x === y) {
-	      // Steps 1-5, 7-10
-	      // Steps 6.b-6.e: +0 != -0
-	      return x !== 0 || 1 / x === 1 / y;
+	var browserAsap = asap;
+	function asap(task) {
+	    var rawTask;
+	    if (freeTasks.length) {
+	        rawTask = freeTasks.pop();
 	    } else {
-	      // Step 6.a: NaN == NaN
-	      return x !== x && y !== y;
+	        rawTask = new RawTask();
 	    }
-	  }
-	  /*eslint-enable no-self-compare*/
-	
-	  /**
-	   * We use an Error-like object for backward compatibility as people may call
-	   * PropTypes directly and inspect their output. However, we don't use real
-	   * Errors anymore. We don't inspect their stack anyway, and creating them
-	   * is prohibitively expensive if they are created too often, such as what
-	   * happens in oneOfType() for any type before the one that matched.
-	   */
-	  function PropTypeError(message) {
-	    this.message = message;
-	    this.stack = '';
-	  }
-	  // Make `instanceof Error` still work for returned errors.
-	  PropTypeError.prototype = Error.prototype;
-	
-	  function createChainableTypeChecker(validate) {
-	    if (process.env.NODE_ENV !== 'production') {
-	      var manualPropTypeCallCache = {};
-	      var manualPropTypeWarningCount = 0;
-	    }
-	    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
-	      componentName = componentName || ANONYMOUS;
-	      propFullName = propFullName || propName;
-	
-	      if (secret !== ReactPropTypesSecret) {
-	        if (throwOnDirectAccess) {
-	          // New behavior only for users of `prop-types` package
-	          invariant(
-	            false,
-	            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
-	            'Use `PropTypes.checkPropTypes()` to call them. ' +
-	            'Read more at http://fb.me/use-check-prop-types'
-	          );
-	        } else if (process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
-	          // Old behavior for people using React.PropTypes
-	          var cacheKey = componentName + ':' + propName;
-	          if (
-	            !manualPropTypeCallCache[cacheKey] &&
-	            // Avoid spamming the console because they are often not actionable except for lib authors
-	            manualPropTypeWarningCount < 3
-	          ) {
-	            warning(
-	              false,
-	              'You are manually calling a React.PropTypes validation ' +
-	              'function for the `%s` prop on `%s`. This is deprecated ' +
-	              'and will throw in the standalone `prop-types` package. ' +
-	              'You may be seeing this warning due to a third-party PropTypes ' +
-	              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.',
-	              propFullName,
-	              componentName
-	            );
-	            manualPropTypeCallCache[cacheKey] = true;
-	            manualPropTypeWarningCount++;
-	          }
-	        }
-	      }
-	      if (props[propName] == null) {
-	        if (isRequired) {
-	          if (props[propName] === null) {
-	            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
-	          }
-	          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
-	        }
-	        return null;
-	      } else {
-	        return validate(props, propName, componentName, location, propFullName);
-	      }
-	    }
-	
-	    var chainedCheckType = checkType.bind(null, false);
-	    chainedCheckType.isRequired = checkType.bind(null, true);
-	
-	    return chainedCheckType;
-	  }
-	
-	  function createPrimitiveTypeChecker(expectedType) {
-	    function validate(props, propName, componentName, location, propFullName, secret) {
-	      var propValue = props[propName];
-	      var propType = getPropType(propValue);
-	      if (propType !== expectedType) {
-	        // `propValue` being instance of, say, date/regexp, pass the 'object'
-	        // check, but we can offer a more precise error message here rather than
-	        // 'of type `object`'.
-	        var preciseType = getPreciseType(propValue);
-	
-	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
-	      }
-	      return null;
-	    }
-	    return createChainableTypeChecker(validate);
-	  }
-	
-	  function createAnyTypeChecker() {
-	    return createChainableTypeChecker(emptyFunction.thatReturnsNull);
-	  }
-	
-	  function createArrayOfTypeChecker(typeChecker) {
-	    function validate(props, propName, componentName, location, propFullName) {
-	      if (typeof typeChecker !== 'function') {
-	        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
-	      }
-	      var propValue = props[propName];
-	      if (!Array.isArray(propValue)) {
-	        var propType = getPropType(propValue);
-	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
-	      }
-	      for (var i = 0; i < propValue.length; i++) {
-	        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
-	        if (error instanceof Error) {
-	          return error;
-	        }
-	      }
-	      return null;
-	    }
-	    return createChainableTypeChecker(validate);
-	  }
-	
-	  function createElementTypeChecker() {
-	    function validate(props, propName, componentName, location, propFullName) {
-	      var propValue = props[propName];
-	      if (!isValidElement(propValue)) {
-	        var propType = getPropType(propValue);
-	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
-	      }
-	      return null;
-	    }
-	    return createChainableTypeChecker(validate);
-	  }
-	
-	  function createInstanceTypeChecker(expectedClass) {
-	    function validate(props, propName, componentName, location, propFullName) {
-	      if (!(props[propName] instanceof expectedClass)) {
-	        var expectedClassName = expectedClass.name || ANONYMOUS;
-	        var actualClassName = getClassName(props[propName]);
-	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
-	      }
-	      return null;
-	    }
-	    return createChainableTypeChecker(validate);
-	  }
-	
-	  function createEnumTypeChecker(expectedValues) {
-	    if (!Array.isArray(expectedValues)) {
-	      process.env.NODE_ENV !== 'production' ? warning(false, 'Invalid argument supplied to oneOf, expected an instance of array.') : void 0;
-	      return emptyFunction.thatReturnsNull;
-	    }
-	
-	    function validate(props, propName, componentName, location, propFullName) {
-	      var propValue = props[propName];
-	      for (var i = 0; i < expectedValues.length; i++) {
-	        if (is(propValue, expectedValues[i])) {
-	          return null;
-	        }
-	      }
-	
-	      var valuesString = JSON.stringify(expectedValues);
-	      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
-	    }
-	    return createChainableTypeChecker(validate);
-	  }
-	
-	  function createObjectOfTypeChecker(typeChecker) {
-	    function validate(props, propName, componentName, location, propFullName) {
-	      if (typeof typeChecker !== 'function') {
-	        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
-	      }
-	      var propValue = props[propName];
-	      var propType = getPropType(propValue);
-	      if (propType !== 'object') {
-	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
-	      }
-	      for (var key in propValue) {
-	        if (propValue.hasOwnProperty(key)) {
-	          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-	          if (error instanceof Error) {
-	            return error;
-	          }
-	        }
-	      }
-	      return null;
-	    }
-	    return createChainableTypeChecker(validate);
-	  }
-	
-	  function createUnionTypeChecker(arrayOfTypeCheckers) {
-	    if (!Array.isArray(arrayOfTypeCheckers)) {
-	      process.env.NODE_ENV !== 'production' ? warning(false, 'Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
-	      return emptyFunction.thatReturnsNull;
-	    }
-	
-	    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
-	      var checker = arrayOfTypeCheckers[i];
-	      if (typeof checker !== 'function') {
-	        warning(
-	          false,
-	          'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
-	          'received %s at index %s.',
-	          getPostfixForTypeWarning(checker),
-	          i
-	        );
-	        return emptyFunction.thatReturnsNull;
-	      }
-	    }
-	
-	    function validate(props, propName, componentName, location, propFullName) {
-	      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
-	        var checker = arrayOfTypeCheckers[i];
-	        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret) == null) {
-	          return null;
-	        }
-	      }
-	
-	      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
-	    }
-	    return createChainableTypeChecker(validate);
-	  }
-	
-	  function createNodeChecker() {
-	    function validate(props, propName, componentName, location, propFullName) {
-	      if (!isNode(props[propName])) {
-	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
-	      }
-	      return null;
-	    }
-	    return createChainableTypeChecker(validate);
-	  }
-	
-	  function createShapeTypeChecker(shapeTypes) {
-	    function validate(props, propName, componentName, location, propFullName) {
-	      var propValue = props[propName];
-	      var propType = getPropType(propValue);
-	      if (propType !== 'object') {
-	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-	      }
-	      for (var key in shapeTypes) {
-	        var checker = shapeTypes[key];
-	        if (!checker) {
-	          continue;
-	        }
-	        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-	        if (error) {
-	          return error;
-	        }
-	      }
-	      return null;
-	    }
-	    return createChainableTypeChecker(validate);
-	  }
-	
-	  function createStrictShapeTypeChecker(shapeTypes) {
-	    function validate(props, propName, componentName, location, propFullName) {
-	      var propValue = props[propName];
-	      var propType = getPropType(propValue);
-	      if (propType !== 'object') {
-	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-	      }
-	      // We need to check all keys in case some are required but missing from
-	      // props.
-	      var allKeys = assign({}, props[propName], shapeTypes);
-	      for (var key in allKeys) {
-	        var checker = shapeTypes[key];
-	        if (!checker) {
-	          return new PropTypeError(
-	            'Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' +
-	            '\nBad object: ' + JSON.stringify(props[propName], null, '  ') +
-	            '\nValid keys: ' +  JSON.stringify(Object.keys(shapeTypes), null, '  ')
-	          );
-	        }
-	        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-	        if (error) {
-	          return error;
-	        }
-	      }
-	      return null;
-	    }
-	
-	    return createChainableTypeChecker(validate);
-	  }
-	
-	  function isNode(propValue) {
-	    switch (typeof propValue) {
-	      case 'number':
-	      case 'string':
-	      case 'undefined':
-	        return true;
-	      case 'boolean':
-	        return !propValue;
-	      case 'object':
-	        if (Array.isArray(propValue)) {
-	          return propValue.every(isNode);
-	        }
-	        if (propValue === null || isValidElement(propValue)) {
-	          return true;
-	        }
-	
-	        var iteratorFn = getIteratorFn(propValue);
-	        if (iteratorFn) {
-	          var iterator = iteratorFn.call(propValue);
-	          var step;
-	          if (iteratorFn !== propValue.entries) {
-	            while (!(step = iterator.next()).done) {
-	              if (!isNode(step.value)) {
-	                return false;
-	              }
-	            }
-	          } else {
-	            // Iterator will provide entry [k,v] tuples rather than values.
-	            while (!(step = iterator.next()).done) {
-	              var entry = step.value;
-	              if (entry) {
-	                if (!isNode(entry[1])) {
-	                  return false;
-	                }
-	              }
-	            }
-	          }
+	    rawTask.task = task;
+	    rawAsap$1(rawTask);
+	}
+
+	// We wrap tasks with recyclable task objects.  A task object implements
+	// `call`, just like a function.
+	function RawTask() {
+	    this.task = null;
+	}
+
+	// The sole purpose of wrapping the task is to catch the exception and recycle
+	// the task object after its single use.
+	RawTask.prototype.call = function () {
+	    try {
+	        this.task.call();
+	    } catch (error) {
+	        if (asap.onerror) {
+	            // This hook exists purely for testing purposes.
+	            // Its name will be periodically randomized to break any code that
+	            // depends on its existence.
+	            asap.onerror(error);
 	        } else {
-	          return false;
+	            // In a web browser, exceptions are not fatal. However, to avoid
+	            // slowing down the queue of pending tasks, we rethrow the error in a
+	            // lower priority turn.
+	            pendingErrors.push(error);
+	            requestErrorThrow();
 	        }
-	
-	        return true;
-	      default:
-	        return false;
+	    } finally {
+	        this.task = null;
+	        freeTasks[freeTasks.length] = this;
 	    }
-	  }
-	
-	  function isSymbol(propType, propValue) {
-	    // Native Symbol.
-	    if (propType === 'symbol') {
-	      return true;
-	    }
-	
-	    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
-	    if (propValue['@@toStringTag'] === 'Symbol') {
-	      return true;
-	    }
-	
-	    // Fallback for non-spec compliant Symbols which are polyfilled.
-	    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
-	      return true;
-	    }
-	
-	    return false;
-	  }
-	
-	  // Equivalent of `typeof` but with special handling for array and regexp.
-	  function getPropType(propValue) {
-	    var propType = typeof propValue;
-	    if (Array.isArray(propValue)) {
-	      return 'array';
-	    }
-	    if (propValue instanceof RegExp) {
-	      // Old webkits (at least until Android 4.0) return 'function' rather than
-	      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
-	      // passes PropTypes.object.
-	      return 'object';
-	    }
-	    if (isSymbol(propType, propValue)) {
-	      return 'symbol';
-	    }
-	    return propType;
-	  }
-	
-	  // This handles more types than `getPropType`. Only used for error messages.
-	  // See `createPrimitiveTypeChecker`.
-	  function getPreciseType(propValue) {
-	    if (typeof propValue === 'undefined' || propValue === null) {
-	      return '' + propValue;
-	    }
-	    var propType = getPropType(propValue);
-	    if (propType === 'object') {
-	      if (propValue instanceof Date) {
-	        return 'date';
-	      } else if (propValue instanceof RegExp) {
-	        return 'regexp';
-	      }
-	    }
-	    return propType;
-	  }
-	
-	  // Returns a string that is postfixed to a warning about an invalid type.
-	  // For example, "undefined" or "of type array"
-	  function getPostfixForTypeWarning(value) {
-	    var type = getPreciseType(value);
-	    switch (type) {
-	      case 'array':
-	      case 'object':
-	        return 'an ' + type;
-	      case 'boolean':
-	      case 'date':
-	      case 'regexp':
-	        return 'a ' + type;
-	      default:
-	        return type;
-	    }
-	  }
-	
-	  // Returns class name of the object, if any.
-	  function getClassName(propValue) {
-	    if (!propValue.constructor || !propValue.constructor.name) {
-	      return ANONYMOUS;
-	    }
-	    return propValue.constructor.name;
-	  }
-	
-	  ReactPropTypes.checkPropTypes = checkPropTypes;
-	  ReactPropTypes.PropTypes = ReactPropTypes;
-	
-	  return ReactPropTypes;
 	};
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
 
-/***/ }),
-/* 36 */
-/***/ (function(module, exports) {
+	var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-	"use strict";
-	
+	function _toConsumableArray$1(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	/* ::
+	import type { SheetDefinition, SheetDefinitions } from './index.js';
+	import type { MaybeSheetDefinition } from './exports.js';
+	import type { SelectorHandler } from './generate.js';
+	*/
+
+	// The current <style> tag we are inserting into, or null if we haven't
+	// inserted anything yet. We could find this each time using
+	// `document.querySelector("style[data-aphrodite"])`, but holding onto it is
+	// faster.
+	var styleTag /* : ?HTMLStyleElement */ = null;
+
+	// Inject a set of rules into a <style> tag in the head of the document. This
+	// will automatically create a style tag and then continue to use it for
+	// multiple injections. It will also use a style tag with the `data-aphrodite`
+	// tag on it if that exists in the DOM. This could be used for e.g. reusing the
+	// same style tag that server-side rendering inserts.
+	var injectStyleTag = function injectStyleTag(cssRules /* : string[] */) {
+	    if (styleTag == null) {
+	        // Try to find a style tag with the `data-aphrodite-factoryfour` attribute first.
+	        styleTag = document.querySelector("style[data-aphrodite-factoryfour]") /* : any */;
+
+	        // If that doesn't work, generate a new style tag.
+	        if (styleTag == null) {
+	            // Taken from
+	            // http://stackoverflow.com/questions/524696/how-to-create-a-style-tag-with-javascript
+	            var docToUse = document;
+	            if (document.getElementById('factoryfour-primary-container') != null) {
+	                docToUse = document.getElementById('factoryfour-primary-container').contentDocument;
+	            }
+
+	            var head = docToUse.head || docToUse.getElementsByTagName('head')[0];
+	            styleTag = docToUse.createElement('style');
+
+	            styleTag.type = 'text/css';
+	            styleTag.setAttribute("data-aphrodite-factoryfour", "");
+	            head.appendChild(styleTag);
+	        }
+	    }
+
+	    var sheet = styleTag.styleSheet || styleTag.sheet /* : any */;
+
+	    if (sheet.insertRule) {
+	        var numRules = sheet.cssRules.length;
+	        cssRules.forEach(function (rule) {
+	            try {
+	                sheet.insertRule(rule, numRules);
+	                numRules += 1;
+	            } catch (e) {
+	                // The selector for this rule wasn't compatible with the browser
+	            }
+	        });
+	    } else {
+	        styleTag.innerText = (styleTag.innerText || '') + cssRules.join('');
+	    }
+	};
+
+	// Custom handlers for stringifying CSS values that have side effects
+	// (such as fontFamily, which can cause @font-face rules to be injected)
+	var stringHandlers = {
+	    // With fontFamily we look for objects that are passed in and interpret
+	    // them as @font-face rules that we need to inject. The value of fontFamily
+	    // can either be a string (as normal), an object (a single font face), or
+	    // an array of objects and strings.
+	    fontFamily: function () {
+	        function fontFamily(val) {
+	            if (Array.isArray(val)) {
+	                return val.map(fontFamily).join(",");
+	            } else if ((typeof val === 'undefined' ? 'undefined' : _typeof$1(val)) === "object") {
+	                injectStyleOnce(val.src, "@font-face", [val], false);
+	                return '"' + String(val.fontFamily) + '"';
+	            } else {
+	                return val;
+	            }
+	        }
+
+	        return fontFamily;
+	    }(),
+
+	    // With animationName we look for an object that contains keyframes and
+	    // inject them as an `@keyframes` block, returning a uniquely generated
+	    // name. The keyframes object should look like
+	    //  animationName: {
+	    //    from: {
+	    //      left: 0,
+	    //      top: 0,
+	    //    },
+	    //    '50%': {
+	    //      left: 15,
+	    //      top: 5,
+	    //    },
+	    //    to: {
+	    //      left: 20,
+	    //      top: 20,
+	    //    }
+	    //  }
+	    // TODO(emily): `stringHandlers` doesn't let us rename the key, so I have
+	    // to use `animationName` here. Improve that so we can call this
+	    // `animation` instead of `animationName`.
+	    animationName: function () {
+	        function animationName(val, selectorHandlers) {
+	            if (Array.isArray(val)) {
+	                return val.map(function (v) {
+	                    return animationName(v, selectorHandlers);
+	                }).join(",");
+	            } else if ((typeof val === 'undefined' ? 'undefined' : _typeof$1(val)) === "object") {
+	                // Generate a unique name based on the hash of the object. We can't
+	                // just use the hash because the name can't start with a number.
+	                // TODO(emily): this probably makes debugging hard, allow a custom
+	                // name?
+	                var name = 'keyframe_' + String(hashObject(val));
+
+	                // Since keyframes need 3 layers of nesting, we use `generateCSS` to
+	                // build the inner layers and wrap it in `@keyframes` ourselves.
+	                var finalVal = '@keyframes ' + name + '{';
+
+	                // TODO see if we can find a way where checking for OrderedElements
+	                // here is not necessary. Alternatively, perhaps we should have a
+	                // utility method that can iterate over either a plain object, an
+	                // instance of OrderedElements, or a Map, and then use that here and
+	                // elsewhere.
+	                if (val instanceof OrderedElements) {
+	                    val.forEach(function (valVal, valKey) {
+	                        finalVal += generateCSS(valKey, [valVal], selectorHandlers, stringHandlers, false).join('');
+	                    });
+	                } else {
+	                    Object.keys(val).forEach(function (key) {
+	                        finalVal += generateCSS(key, [val[key]], selectorHandlers, stringHandlers, false).join('');
+	                    });
+	                }
+	                finalVal += '}';
+
+	                injectGeneratedCSSOnce(name, [finalVal]);
+
+	                return name;
+	            } else {
+	                return val;
+	            }
+	        }
+
+	        return animationName;
+	    }()
+	};
+
+	// This is a map from Aphrodite's generated class names to `true` (acting as a
+	// set of class names)
+	var alreadyInjected = {};
+
+	// This is the buffer of styles which have not yet been flushed.
+	var injectionBuffer /* : string[] */ = [];
+
+	// A flag to tell if we are already buffering styles. This could happen either
+	// because we scheduled a flush call already, so newly added styles will
+	// already be flushed, or because we are statically buffering on the server.
+	var isBuffering = false;
+
+	var injectGeneratedCSSOnce = function injectGeneratedCSSOnce(key, generatedCSS) {
+	    var _injectionBuffer;
+
+	    if (alreadyInjected[key]) {
+	        return;
+	    }
+
+	    if (!isBuffering) {
+	        // We should never be automatically buffering on the server (or any
+	        // place without a document), so guard against that.
+	        if (typeof document === "undefined") {
+	            throw new Error("Cannot automatically buffer without a document");
+	        }
+
+	        // If we're not already buffering, schedule a call to flush the
+	        // current styles.
+	        isBuffering = true;
+	        browserAsap(flushToStyleTag);
+	    }
+
+	    (_injectionBuffer = injectionBuffer).push.apply(_injectionBuffer, _toConsumableArray$1(generatedCSS));
+	    alreadyInjected[key] = true;
+	};
+
+	var injectStyleOnce = function injectStyleOnce(key /* : string */
+	, selector /* : string */
+	, definitions /* : SheetDefinition[] */
+	, useImportant /* : boolean */
+	) {
+	    var selectorHandlers /* : SelectorHandler[] */ = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : [];
+
+	    if (alreadyInjected[key]) {
+	        return;
+	    }
+
+	    var generated = generateCSS(selector, definitions, selectorHandlers, stringHandlers, useImportant);
+
+	    injectGeneratedCSSOnce(key, generated);
+	};
+
+	var reset = function reset() {
+	    injectionBuffer = [];
+	    alreadyInjected = {};
+	    isBuffering = false;
+	    styleTag = null;
+	};
+
+	var startBuffering = function startBuffering() {
+	    if (isBuffering) {
+	        throw new Error("Cannot buffer while already buffering");
+	    }
+	    isBuffering = true;
+	};
+
+	var flushToArray = function flushToArray() {
+	    isBuffering = false;
+	    var ret = injectionBuffer;
+	    injectionBuffer = [];
+	    return ret;
+	};
+
+	var flushToString = function flushToString() {
+	    return flushToArray().join('');
+	};
+
+	var flushToStyleTag = function flushToStyleTag() {
+	    var cssRules = flushToArray();
+	    if (cssRules.length > 0) {
+	        injectStyleTag(cssRules);
+	    }
+	};
+
+	var getRenderedClassNames = function getRenderedClassNames() {
+	    return Object.keys(alreadyInjected);
+	};
+
+	var addRenderedClassNames = function addRenderedClassNames(classNames /* : string[] */) {
+	    classNames.forEach(function (className) {
+	        alreadyInjected[className] = true;
+	    });
+	};
+
+	var processStyleDefinitions = function processStyleDefinitions(styleDefinitions /* : any[] */
+	, classNameBits /* : string[] */
+	, definitionBits /* : Object[] */
+	, length /* : number */
+	) /* : number */{
+	    for (var i = 0; i < styleDefinitions.length; i += 1) {
+	        // Filter out falsy values from the input, to allow for
+	        // `css(a, test && c)`
+	        if (styleDefinitions[i]) {
+	            if (Array.isArray(styleDefinitions[i])) {
+	                // We've encountered an array, so let's recurse
+	                length += processStyleDefinitions(styleDefinitions[i], classNameBits, definitionBits, length);
+	            } else {
+	                classNameBits.push(styleDefinitions[i]._name);
+	                definitionBits.push(styleDefinitions[i]._definition);
+	                length += styleDefinitions[i]._len;
+	            }
+	        }
+	    }
+	    return length;
+	};
+
+	/**
+	 * Inject styles associated with the passed style definition objects, and return
+	 * an associated CSS class name.
+	 *
+	 * @param {boolean} useImportant If true, will append !important to generated
+	 *     CSS output. e.g. {color: red} -> "color: red !important".
+	 * @param {(Object|Object[])[]} styleDefinitions style definition objects, or
+	 *     arbitrarily nested arrays of them, as returned as properties of the
+	 *     return value of StyleSheet.create().
+	 */
+	var injectAndGetClassName = function injectAndGetClassName(useImportant /* : boolean */
+	, styleDefinitions /* : MaybeSheetDefinition[] */
+	, selectorHandlers /* : SelectorHandler[] */
+	) /* : string */{
+	    var classNameBits = [];
+	    var definitionBits = [];
+
+	    // Mutates classNameBits and definitionBits and returns a length which we
+	    // will append to the hash to decrease the chance of hash collisions.
+	    var length = processStyleDefinitions(styleDefinitions, classNameBits, definitionBits, 0);
+
+	    // Break if there aren't any valid styles.
+	    if (classNameBits.length === 0) {
+	        return "";
+	    }
+
+	    var className = void 0;
+	    {
+	        className = classNameBits.length === 1 ? '_' + String(classNameBits[0]) : '_' + String(hashString(classNameBits.join())) + String((length % 36).toString(36));
+	    }
+
+	    injectStyleOnce(className, '.' + String(className), definitionBits, useImportant, selectorHandlers);
+
+	    return className;
+	};
+
+	/* ::
+	import type { SelectorHandler } from './generate.js';
+	export type SheetDefinition = { [id:string]: any };
+	export type SheetDefinitions = SheetDefinition | SheetDefinition[];
+	type RenderFunction = () => string;
+	type Extension = {
+	    selectorHandler: SelectorHandler
+	};
+	export type MaybeSheetDefinition = SheetDefinition | false | null | void
+	*/
+
+	var unminifiedHashFn = function unminifiedHashFn(str /* : string */, key /* : string */) {
+	    return String(key) + '_' + String(hashString(str));
+	};
+
+	// StyleSheet.create is in a hot path so we want to keep as much logic out of it
+	// as possible. So, we figure out which hash function to use once, and only
+	// switch it out via minify() as necessary.
+	//
+	// This is in an exported function to make it easier to test.
+	var initialHashFn = function initialHashFn() {
+	    return hashString;
+	};
+
+	var hashFn = initialHashFn();
+
+	var StyleSheet = {
+	    create: function () {
+	        function create(sheetDefinition /* : SheetDefinition */) /* : Object */{
+	            var mappedSheetDefinition = {};
+	            var keys = Object.keys(sheetDefinition);
+
+	            for (var i = 0; i < keys.length; i += 1) {
+	                var key = keys[i];
+	                var val = sheetDefinition[key];
+	                var stringVal = JSON.stringify(val);
+
+	                mappedSheetDefinition[key] = {
+	                    _len: stringVal.length,
+	                    _name: hashFn(stringVal, key),
+	                    _definition: val
+	                };
+	            }
+
+	            return mappedSheetDefinition;
+	        }
+
+	        return create;
+	    }(),
+	    rehydrate: function () {
+	        function rehydrate() {
+	            var renderedClassNames /* : string[] */ = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+	            addRenderedClassNames(renderedClassNames);
+	        }
+
+	        return rehydrate;
+	    }()
+	};
+
+	/**
+	 * Utilities for using Aphrodite server-side.
+	 *
+	 * This can be minified out in client-only bundles by replacing `typeof window`
+	 * with `"object"`, e.g. via Webpack's DefinePlugin:
+	 *
+	 *   new webpack.DefinePlugin({
+	 *     "typeof window": JSON.stringify("object")
+	 *   })
+	 */
+	var StyleSheetServer = typeof window !== 'undefined' ? null : {
+	    renderStatic: function () {
+	        function renderStatic(renderFunc /* : RenderFunction */) {
+	            reset();
+	            startBuffering();
+	            var html = renderFunc();
+	            var cssContent = flushToString();
+
+	            return {
+	                html: html,
+	                css: {
+	                    content: cssContent,
+	                    renderedClassNames: getRenderedClassNames()
+	                }
+	            };
+	        }
+
+	        return renderStatic;
+	    }()
+	};
+
+	/**
+	 * Utilities for using Aphrodite in tests.
+	 *
+	 * Not meant to be used in production.
+	 */
+	var StyleSheetTestUtils = null;
+
+	/**
+	 * Generate the Aphrodite API exports, with given `selectorHandlers` and
+	 * `useImportant` state.
+	 */
+	function makeExports(useImportant /* : boolean */
+	, selectorHandlers /* : SelectorHandler[] */
+	) {
+	    return {
+	        StyleSheet: Object.assign({}, StyleSheet, {
+
+	            /**
+	             * Returns a version of the exports of Aphrodite (i.e. an object
+	             * with `css` and `StyleSheet` properties) which have some
+	             * extensions included.
+	             *
+	             * @param {Array.<Object>} extensions: An array of extensions to
+	             *     add to this instance of Aphrodite. Each object should have a
+	             *     single property on it, defining which kind of extension to
+	             *     add.
+	             * @param {SelectorHandler} [extensions[].selectorHandler]: A
+	             *     selector handler extension. See `defaultSelectorHandlers` in
+	             *     generate.js.
+	             *
+	             * @returns {Object} An object containing the exports of the new
+	             *     instance of Aphrodite.
+	             */
+	            extend: function () {
+	                function extend(extensions /* : Extension[] */) {
+	                    var extensionSelectorHandlers = extensions
+	                    // Pull out extensions with a selectorHandler property
+	                    .map(function (extension) {
+	                        return extension.selectorHandler;
+	                    })
+	                    // Remove nulls (i.e. extensions without a selectorHandler
+	                    // property).
+	                    .filter(function (handler) {
+	                        return handler;
+	                    });
+
+	                    return makeExports(useImportant, selectorHandlers.concat(extensionSelectorHandlers));
+	                }
+
+	                return extend;
+	            }()
+	        }),
+
+	        StyleSheetServer: StyleSheetServer,
+	        StyleSheetTestUtils: StyleSheetTestUtils,
+	        reset: reset,
+	        minify: function () {
+	            function minify(shouldMinify /* : boolean */) {
+	                hashFn = shouldMinify ? hashString : unminifiedHashFn;
+	            }
+
+	            return minify;
+	        }(),
+	        css: function () {
+	            function css() /* : MaybeSheetDefinition[] */{
+	                for (var _len = arguments.length, styleDefinitions = Array(_len), _key = 0; _key < _len; _key++) {
+	                    styleDefinitions[_key] = arguments[_key];
+	                }
+
+	                return injectAndGetClassName(useImportant, styleDefinitions, selectorHandlers);
+	            }
+
+	            return css;
+	        }()
+	    };
+	}
+
 	/**
 	 * Copyright (c) 2013-present, Facebook, Inc.
 	 *
@@ -3064,20 +2199,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * 
 	 */
-	
+
 	function makeEmptyFunction(arg) {
 	  return function () {
 	    return arg;
 	  };
 	}
-	
+
 	/**
 	 * This function accepts and discards inputs; it has no side effects. This is
 	 * primarily useful idiomatically for overridable function endpoints which
 	 * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
 	 */
 	var emptyFunction = function emptyFunction() {};
-	
+
 	emptyFunction.thatReturns = makeEmptyFunction;
 	emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
 	emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
@@ -3088,23 +2223,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	emptyFunction.thatReturnsArgument = function (arg) {
 	  return arg;
 	};
-	
-	module.exports = emptyFunction;
 
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
+	var emptyFunction_1 = emptyFunction;
 
-	/* WEBPACK VAR INJECTION */(function(process) {/**
+	var emptyFunction$1 = /*#__PURE__*/Object.freeze({
+		default: emptyFunction_1,
+		__moduleExports: emptyFunction_1
+	});
+
+	/**
 	 * Copyright (c) 2013-present, Facebook, Inc.
 	 *
 	 * This source code is licensed under the MIT license found in the
 	 * LICENSE file in the root directory of this source tree.
 	 *
 	 */
-	
-	'use strict';
-	
+
 	/**
 	 * Use invariant() to assert state which your program assumes to be true.
 	 *
@@ -3115,20 +2249,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * The invariant message will be stripped in production, but the invariant
 	 * will remain to ensure logic does not differ in production.
 	 */
-	
+
 	var validateFormat = function validateFormat(format) {};
-	
-	if (process.env.NODE_ENV !== 'production') {
-	  validateFormat = function validateFormat(format) {
-	    if (format === undefined) {
-	      throw new Error('invariant requires an error message argument');
-	    }
-	  };
-	}
-	
+
 	function invariant(condition, format, a, b, c, d, e, f) {
 	  validateFormat(format);
-	
+
 	  if (!condition) {
 	    var error;
 	    if (format === undefined) {
@@ -3141,182 +2267,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }));
 	      error.name = 'Invariant Violation';
 	    }
-	
+
 	    error.framesToPop = 1; // we don't care about invariant's own frame
 	    throw error;
 	  }
 	}
-	
-	module.exports = invariant;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
 
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
+	var invariant_1 = invariant;
 
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright (c) 2014-present, Facebook, Inc.
-	 *
-	 * This source code is licensed under the MIT license found in the
-	 * LICENSE file in the root directory of this source tree.
-	 *
-	 */
-	
-	'use strict';
-	
-	var emptyFunction = __webpack_require__(36);
-	
-	/**
-	 * Similar to invariant but only logs a warning if the condition is not met.
-	 * This can be used to log issues in development environments in critical
-	 * paths. Removing the logging code for production environments will keep the
-	 * same logic and follow the same code paths.
-	 */
-	
-	var warning = emptyFunction;
-	
-	if (process.env.NODE_ENV !== 'production') {
-	  var printWarning = function printWarning(format) {
-	    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-	      args[_key - 1] = arguments[_key];
-	    }
-	
-	    var argIndex = 0;
-	    var message = 'Warning: ' + format.replace(/%s/g, function () {
-	      return args[argIndex++];
-	    });
-	    if (typeof console !== 'undefined') {
-	      console.error(message);
-	    }
-	    try {
-	      // --- Welcome to debugging React ---
-	      // This error was thrown as a convenience so that you can use this stack
-	      // to find the callsite that caused this warning to fire.
-	      throw new Error(message);
-	    } catch (x) {}
-	  };
-	
-	  warning = function warning(condition, format) {
-	    if (format === undefined) {
-	      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
-	    }
-	
-	    if (format.indexOf('Failed Composite propType: ') === 0) {
-	      return; // Ignore CompositeComponent proptype check.
-	    }
-	
-	    if (!condition) {
-	      for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-	        args[_key2 - 2] = arguments[_key2];
-	      }
-	
-	      printWarning.apply(undefined, [format].concat(args));
-	    }
-	  };
-	}
-	
-	module.exports = warning;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports) {
-
-	/*
-	object-assign
-	(c) Sindre Sorhus
-	@license MIT
-	*/
-	
-	'use strict';
-	/* eslint-disable no-unused-vars */
-	var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-	var hasOwnProperty = Object.prototype.hasOwnProperty;
-	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-	
-	function toObject(val) {
-		if (val === null || val === undefined) {
-			throw new TypeError('Object.assign cannot be called with null or undefined');
-		}
-	
-		return Object(val);
-	}
-	
-	function shouldUseNative() {
-		try {
-			if (!Object.assign) {
-				return false;
-			}
-	
-			// Detect buggy property enumeration order in older V8 versions.
-	
-			// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-			var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
-			test1[5] = 'de';
-			if (Object.getOwnPropertyNames(test1)[0] === '5') {
-				return false;
-			}
-	
-			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-			var test2 = {};
-			for (var i = 0; i < 10; i++) {
-				test2['_' + String.fromCharCode(i)] = i;
-			}
-			var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-				return test2[n];
-			});
-			if (order2.join('') !== '0123456789') {
-				return false;
-			}
-	
-			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-			var test3 = {};
-			'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-				test3[letter] = letter;
-			});
-			if (Object.keys(Object.assign({}, test3)).join('') !==
-					'abcdefghijklmnopqrst') {
-				return false;
-			}
-	
-			return true;
-		} catch (err) {
-			// We don't expect any of the above to throw, but better to be safe.
-			return false;
-		}
-	}
-	
-	module.exports = shouldUseNative() ? Object.assign : function (target, source) {
-		var from;
-		var to = toObject(target);
-		var symbols;
-	
-		for (var s = 1; s < arguments.length; s++) {
-			from = Object(arguments[s]);
-	
-			for (var key in from) {
-				if (hasOwnProperty.call(from, key)) {
-					to[key] = from[key];
-				}
-			}
-	
-			if (getOwnPropertySymbols) {
-				symbols = getOwnPropertySymbols(from);
-				for (var i = 0; i < symbols.length; i++) {
-					if (propIsEnumerable.call(from, symbols[i])) {
-						to[symbols[i]] = from[symbols[i]];
-					}
-				}
-			}
-		}
-	
-		return to;
-	};
-
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports) {
+	var invariant$1 = /*#__PURE__*/Object.freeze({
+		default: invariant_1,
+		__moduleExports: invariant_1
+	});
 
 	/**
 	 * Copyright (c) 2013-present, Facebook, Inc.
@@ -3324,115 +2286,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * This source code is licensed under the MIT license found in the
 	 * LICENSE file in the root directory of this source tree.
 	 */
-	
-	'use strict';
-	
+
 	var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
-	
-	module.exports = ReactPropTypesSecret;
 
+	var ReactPropTypesSecret_1 = ReactPropTypesSecret;
 
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
+	var ReactPropTypesSecret$1 = /*#__PURE__*/Object.freeze({
+		default: ReactPropTypesSecret_1,
+		__moduleExports: ReactPropTypesSecret_1
+	});
 
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 *
-	 * This source code is licensed under the MIT license found in the
-	 * LICENSE file in the root directory of this source tree.
-	 */
-	
-	'use strict';
-	
-	if (process.env.NODE_ENV !== 'production') {
-	  var invariant = __webpack_require__(37);
-	  var warning = __webpack_require__(38);
-	  var ReactPropTypesSecret = __webpack_require__(40);
-	  var loggedTypeFailures = {};
-	}
-	
-	/**
-	 * Assert that the values match with the type specs.
-	 * Error messages are memorized and will only be shown once.
-	 *
-	 * @param {object} typeSpecs Map of name to a ReactPropType
-	 * @param {object} values Runtime values that need to be type-checked
-	 * @param {string} location e.g. "prop", "context", "child context"
-	 * @param {string} componentName Name of the component for error messages.
-	 * @param {?Function} getStack Returns the component stack.
-	 * @private
-	 */
-	function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
-	  if (process.env.NODE_ENV !== 'production') {
-	    for (var typeSpecName in typeSpecs) {
-	      if (typeSpecs.hasOwnProperty(typeSpecName)) {
-	        var error;
-	        // Prop type validation may throw. In case they do, we don't want to
-	        // fail the render phase where it didn't fail before. So we log it.
-	        // After these have been cleaned up, we'll let them throw.
-	        try {
-	          // This is intentionally an invariant that gets caught. It's the same
-	          // behavior as without this statement except with a better message.
-	          invariant(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'the `prop-types` package, but received `%s`.', componentName || 'React class', location, typeSpecName, typeof typeSpecs[typeSpecName]);
-	          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
-	        } catch (ex) {
-	          error = ex;
-	        }
-	        warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
-	        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
-	          // Only monitor this failure once because there tends to be a lot of the
-	          // same error.
-	          loggedTypeFailures[error.message] = true;
-	
-	          var stack = getStack ? getStack() : '';
-	
-	          warning(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
-	        }
-	      }
-	    }
-	  }
-	}
-	
-	module.exports = checkPropTypes;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
+	var emptyFunction$2 = ( emptyFunction$1 && emptyFunction_1 ) || emptyFunction$1;
 
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
+	var invariant$2 = ( invariant$1 && invariant_1 ) || invariant$1;
 
-	/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 *
-	 * This source code is licensed under the MIT license found in the
-	 * LICENSE file in the root directory of this source tree.
-	 */
-	
-	'use strict';
-	
-	var emptyFunction = __webpack_require__(36);
-	var invariant = __webpack_require__(37);
-	var ReactPropTypesSecret = __webpack_require__(40);
-	
-	module.exports = function() {
+	var ReactPropTypesSecret$2 = ( ReactPropTypesSecret$1 && ReactPropTypesSecret_1 ) || ReactPropTypesSecret$1;
+
+	var factoryWithThrowingShims = function() {
 	  function shim(props, propName, componentName, location, propFullName, secret) {
-	    if (secret === ReactPropTypesSecret) {
+	    if (secret === ReactPropTypesSecret$2) {
 	      // It is still safe when called from React.
 	      return;
 	    }
-	    invariant(
+	    invariant$2(
 	      false,
 	      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
 	      'Use PropTypes.checkPropTypes() to call them. ' +
 	      'Read more at http://fb.me/use-check-prop-types'
 	    );
-	  };
-	  shim.isRequired = shim;
+	  }  shim.isRequired = shim;
 	  function getShim() {
 	    return shim;
-	  };
-	  // Important!
+	  }  // Important!
 	  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
 	  var ReactPropTypes = {
 	    array: shim,
@@ -3442,7 +2327,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    object: shim,
 	    string: shim,
 	    symbol: shim,
-	
+
 	    any: shim,
 	    arrayOf: getShim,
 	    element: shim,
@@ -3454,16 +2339,70 @@ return /******/ (function(modules) { // webpackBootstrap
 	    shape: getShim,
 	    exact: getShim
 	  };
-	
-	  ReactPropTypes.checkPropTypes = emptyFunction;
+
+	  ReactPropTypes.checkPropTypes = emptyFunction$2;
 	  ReactPropTypes.PropTypes = ReactPropTypes;
-	
+
 	  return ReactPropTypes;
 	};
 
+	var factoryWithThrowingShims$1 = /*#__PURE__*/Object.freeze({
+		default: factoryWithThrowingShims,
+		__moduleExports: factoryWithThrowingShims
+	});
 
-/***/ })
-/******/ ])
-});
-;
+	var require$$0 = ( factoryWithThrowingShims$1 && factoryWithThrowingShims ) || factoryWithThrowingShims$1;
+
+	var propTypes = createCommonjsModule(function (module) {
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
+
+	{
+	  // By explicitly using `prop-types` you are opting into new production behavior.
+	  // http://fb.me/prop-types-in-prod
+	  module.exports = require$$0();
+	}
+	});
+
+	var AphroditeClass = propTypes.shape({
+	    _len: propTypes.number,
+	    _name: propTypes.string,
+	    _definition: propTypes.object
+	});
+
+	var AphroditeClasses = propTypes.oneOfType([AphroditeClass, propTypes.arrayOf(AphroditeClass)]);
+
+	var types = /*#__PURE__*/Object.freeze({
+		AphroditeClass: AphroditeClass,
+		AphroditeClasses: AphroditeClasses
+	});
+
+	var useImportant = true; // Add !important to all style definitions
+	var Aphrodite = makeExports(useImportant, defaultSelectorHandlers);
+
+	var StyleSheet$1 = Aphrodite.StyleSheet,
+	    StyleSheetServer$1 = Aphrodite.StyleSheetServer,
+	    StyleSheetTestUtils$1 = Aphrodite.StyleSheetTestUtils,
+	    css = Aphrodite.css,
+	    reset$1 = Aphrodite.reset,
+	    minify = Aphrodite.minify;
+
+	exports.StyleSheet = StyleSheet$1;
+	exports.StyleSheetServer = StyleSheetServer$1;
+	exports.StyleSheetTestUtils = StyleSheetTestUtils$1;
+	exports.css = css;
+	exports.reset = reset$1;
+	exports.minify = minify;
+	exports.flushToStyleTag = flushToStyleTag;
+	exports.injectAndGetClassName = injectAndGetClassName;
+	exports.defaultSelectorHandlers = defaultSelectorHandlers;
+	exports.types = types;
+
+	Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
 //# sourceMappingURL=aphrodite.umd.js.map

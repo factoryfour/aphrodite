@@ -1,16 +1,17 @@
 import asap from 'asap';
 import {assert} from 'chai';
-import jsdom from 'jsdom';
+import {JSDOM} from 'jsdom';
 
 import {
   StyleSheet,
   css
 } from '../src/no-important.js';
 import { reset } from '../src/inject.js';
+import { getSheetText } from './testUtils.js';
 
 describe('css', () => {
     beforeEach(() => {
-        global.document = jsdom.jsdom();
+        global.document = new JSDOM('').window.document;
         reset();
     });
 
@@ -31,11 +32,19 @@ describe('css', () => {
         asap(() => {
             const styleTags = global.document.getElementsByTagName("style");
             const lastTag = styleTags[styleTags.length - 1];
+            const styles = getSheetText(lastTag.sheet);
 
-            assert.include(lastTag.textContent, `${sheet.red._name}{`);
-            assert.match(lastTag.textContent, /color:red/);
-            assert.notMatch(lastTag.textContent, /!important/);
+            assert.include(styles, `${sheet.red._name} {`);
+            assert.match(styles, /color: red/);
+            assert.notMatch(styles, /!important/);
             done();
         });
     });
+});
+
+it('no-important exports match default package exports, except for propTypes', () => {
+    const defaultExports = require('../src/index');
+    delete defaultExports.types;
+    const noImportantExports = require('../src/no-important');
+    assert.hasAllKeys(noImportantExports, Object.keys(defaultExports));
 });

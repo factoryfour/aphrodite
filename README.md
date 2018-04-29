@@ -1,6 +1,6 @@
-# Aphrodite: Inline Styles that work
+# Aphrodite [![npm version](https://badge.fury.io/js/aphrodite.svg)](https://badge.fury.io/js/aphrodite) [![Build Status](https://travis-ci.org/Khan/aphrodite.svg?branch=master)](https://travis-ci.org/Khan/aphrodite) [![Coverage Status](https://coveralls.io/repos/github/Khan/aphrodite/badge.svg?branch=master)](https://coveralls.io/github/Khan/aphrodite?branch=master) [![Gitter chat](https://img.shields.io/gitter/room/Khan/aphrodite.svg)](https://gitter.im/Khan/aphrodite) [![gzip size][gzip-badge]][unpkg-dist] [![size][size-badge]][unpkg-dist]
 
-[![npm version](https://badge.fury.io/js/aphrodite.svg)](https://badge.fury.io/js/aphrodite) [![Build Status](https://travis-ci.org/Khan/aphrodite.svg?branch=master)](https://travis-ci.org/Khan/aphrodite) [![Coverage Status](https://coveralls.io/repos/github/Khan/aphrodite/badge.svg?branch=master)](https://coveralls.io/github/Khan/aphrodite?branch=master) [![Gitter chat](https://img.shields.io/gitter/room/Khan/aphrodite.svg)](https://gitter.im/Khan/aphrodite)
+_Framework-agnostic CSS-in-JS with support for server-side rendering, browser prefixing, and minimum CSS generation._
 
 Support for colocating your styles with your JavaScript component.
 
@@ -179,6 +179,23 @@ to avoid this behaviour, then instead of importing `aphrodite`, import
 import { StyleSheet, css } from 'aphrodite/no-important';
 ```
 
+## Minifying style names
+
+By default, Aphrodite will minify style names down to their hashes in production
+(`process.env.NODE_ENV === 'production'`). You can override this behavior by
+calling `minify` with `true` or `false` before calling `StyleSheet.create`.
+
+This is useful if you want to facilitate debugging in production for example.
+
+```js
+import { StyleSheet, minify } from 'aphrodite';
+
+// Always keep the full style names
+minify(false);
+
+// ... proceed to use StyleSheet.create etc.
+```
+
 ## Font Faces
 
 Creating custom font faces is a special case. Typically you need to define a global `@font-face` rule. In the case of Aphrodite we only want to insert that rule if it's actually being referenced by a class that's in the page. We've made it so that the `fontFamily` property can accept a font-face object (either directly or inside an array). A global `@font-face` rule is then generated based on the font definition.
@@ -249,7 +266,7 @@ Aphrodite will ensure that `@keyframes` rules are never duplicated, no matter ho
 
 # Use without React
 
-Aphrodite was built with React in mind, but does not depend on React. Here, you can see it
+Aphrodite was built with React in mind but does not depend on React. Here, you can see it
 used with [Web Components][webcomponents]:
 
 ```js
@@ -282,7 +299,7 @@ Aphrodite will automatically attempt to create a `<style>` tag in the document's
 
 To speed up injection of styles, Aphrodite will automatically try to buffer writes to this `<style>` tag so that minimum number of DOM modifications happen.
 
-Aphrodite uses [asap](https://github.com/kriskowal/asap) to schedule buffer flushing. If you measure DOM elements' dimensions in `componentDidMount` or `componentDidUpdate`, you can use `setTimeout` function to ensure all styles are injected.
+Aphrodite uses [asap](https://github.com/kriskowal/asap) to schedule buffer flushing. If you measure DOM elements' dimensions in `componentDidMount` or `componentDidUpdate`, you can use `setTimeout` or `flushToStyleTag` to ensure all styles are injected.
 
 ```js
 import { StyleSheet, css } from 'aphrodite';
@@ -385,7 +402,7 @@ const className = css(styles.foo) + " " + css(styles.bar);
 ```
 
 Why does it matter? Although the second one will produce a valid class name, it cannot guarantee that the `bar` styles will override the `foo` ones.
-The way the CSS works, it is not the *class name that comes last on a element* that matters, it is specificity. When we look at the generated CSS though, we find that all of the class names have the same specificity, since they are all a single class name:
+The way the CSS works, it is not the *class name that comes last on an element* that matters, it is specificity. When we look at the generated CSS though, we find that all of the class names have the same specificity, since they are all a single class name:
 
 ```css
 .foo_im3wl1 {
@@ -596,12 +613,13 @@ It isn't determinate whether divs will be red or blue.
 
 ## Minify class names
 
-Minify class names by setting the environment variable `process.env.NODE_ENV` 
-to the string value `production`. 
+Minify class names by setting the environment variable `process.env.NODE_ENV`
+to the string value `production`.
 
 # Tools
 
 - [Aphrodite output tool](https://output.jsbin.com/qoseye) - Paste what you pass to `StyleSheet.create` and see the generated CSS
+- [jest-aphrodite-react](https://github.com/dmiller9911/jest-aphrodite-react) - Utilities for testing with React and Jest.
 
 # TODO
 
@@ -614,19 +632,14 @@ to the string value `production`.
 - [dowjones/react-inline-style](https://github.com/dowjones/react-inline-style)
 - [martinandert/react-inline](https://github.com/martinandert/react-inline)
 - [milesj/aesthetic](https://github.com/milesj/aesthetic) - a React style abstraction layer with theme support
+- [airbnb/react-with-styles](https://github.com/airbnb/react-with-styles)
 
 # License (MIT)
 
 Copyright (c) 2016 Khan Academy
 
-Includes works from https://github.com/garycourt/murmurhash-js, which is MIT licensed with the following copyright:
-
-Copyright (c) 2011 Gary Court
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 [webcomponents]: http://w3c.github.io/webcomponents/spec/custom
+
+[gzip-badge]: http://img.badgesize.io/https://unpkg.com/aphrodite/dist/aphrodite.umd.min.js?compression=gzip&label=gzip%20size
+[size-badge]: http://img.badgesize.io/https://unpkg.com/aphrodite/dist/aphrodite.umd.min.js?label=size
+[unpkg-dist]: https://unpkg.com/aphrodite/dist/
